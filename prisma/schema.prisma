@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model QuoteRequest {
+  id          String   @id @default(cuid())
+  projectName String
+  projectType String
+  timeline    String
+  description String
+  services    String
+  budget      String?
+  name        String
+  company     String?
+  email       String
+  phone       String?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model CareerApplication {
+  id        String   @id @default(cuid())
+  jobSlug   String
+  name      String
+  email     String
+  phone     String?
+  resumeUrl String?
+  message   String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+model Project {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  category        String
+  shortDescription String
+  description     String
+  technologies    String
+  services        String
+  year            String
+  clientType      String
+  featured        Boolean  @default(false)
+  challenge       String
+  solution        String
+  results         String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([featured])
+}
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  category    String
+  author      String
+  date        String
+  readTime    String
+  featured    Boolean  @default(false)
+  tags        String
+  content     String
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([featured])
+  @@index([published])
+}
+model Service {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  shortDescription  String
+  description       String
+  category         String
+  features         String
+  process          String
+  featured         Boolean  @default(false)
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([featured])
+  @@index([published])
+}
+model Job {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  department     String
+  location       String
+  type           String
+  experience     String
+  description    String
+  responsibilities String
+  requirements   String
+  niceToHave     String
+  featured       Boolean  @default(false)
+  published      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([featured])
+  @@index([published])
+}
