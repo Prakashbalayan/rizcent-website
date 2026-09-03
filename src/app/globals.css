@@ -857,3 +857,2564 @@ svg {
     transition: none !important;
   }
 }
+/* =========================================================
+   RIZCENT — PREMIUM DARK HERO
+   ========================================================= */
+
+.rz-hero {
+  position: relative;
+
+  min-height: 850px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 70% 45%,
+      rgba(99, 91, 255, 0.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(99, 91, 255, 0.07),
+      transparent 28%
+    ),
+    #060913;
+
+  color: #ffffff;
+}
+
+.rz-hero-container {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(1380px, calc(100% - 80px));
+
+  margin: 0 auto;
+
+  padding:
+    145px
+    0
+    80px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(0, 1.05fr);
+
+  align-items: center;
+
+  gap: 35px;
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.rz-hero-grid {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.28;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+
+  background-size: 65px 65px;
+
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 10%,
+      transparent 78%
+    );
+
+  animation:
+    rzGridMove
+    25s
+    linear
+    infinite;
+}
+
+@keyframes rzGridMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(65px);
+  }
+}
+
+/* =========================================================
+   GLOWS
+   ========================================================= */
+
+.rz-hero-glow {
+  position: absolute;
+
+  border-radius: 999px;
+
+  pointer-events: none;
+
+  filter: blur(100px);
+}
+
+.rz-hero-glow-1 {
+  width: 450px;
+  height: 450px;
+
+  left: -180px;
+  top: -160px;
+
+  background:
+    rgba(99, 91, 255, 0.13);
+
+  animation:
+    rzGlowMove1
+    10s
+    ease-in-out
+    infinite;
+}
+
+.rz-hero-glow-2 {
+  width: 500px;
+  height: 500px;
+
+  right: -180px;
+  top: 180px;
+
+  background:
+    rgba(34, 211, 238, 0.07);
+
+  animation:
+    rzGlowMove2
+    12s
+    ease-in-out
+    infinite;
+}
+
+.rz-hero-glow-3 {
+  width: 350px;
+  height: 350px;
+
+  left: 38%;
+  bottom: -240px;
+
+  background:
+    rgba(99, 91, 255, 0.09);
+
+  animation:
+    rzGlowMove3
+    14s
+    ease-in-out
+    infinite;
+}
+
+@keyframes rzGlowMove1 {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(35px, 25px, 0)
+      scale(1.12);
+  }
+}
+
+@keyframes rzGlowMove2 {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate3d(-30px, 20px, 0)
+      scale(1.08);
+  }
+}
+
+@keyframes rzGlowMove3 {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform:
+      translate3d(-25px, -25px, 0);
+  }
+}
+
+/* =========================================================
+   LEFT COPY
+   ========================================================= */
+
+.rz-hero-copy {
+  position: relative;
+
+  z-index: 20;
+
+  max-width: 680px;
+}
+
+.rz-hero-badge {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    10px
+    15px;
+
+  border:
+    1px solid
+    rgba(99, 91, 255, 0.35);
+
+  border-radius: 999px;
+
+  background:
+    rgba(99, 91, 255, 0.07);
+
+  color: #b9c2ff;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing:
+    0.16em;
+
+  box-shadow:
+    inset
+    0
+    1px
+    0
+    rgba(255, 255, 255, 0.04);
+
+  animation:
+    rzFadeUp
+    800ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.rz-badge-dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #34d399;
+
+  box-shadow:
+    0 0 10px
+    rgba(52, 211, 153, 0.8);
+
+  animation:
+    rzStatusPulse
+    2s
+    ease-in-out
+    infinite;
+}
+
+.rz-hero-title {
+  margin:
+    35px
+    0
+    0;
+
+  font-size:
+    clamp(
+      48px,
+      5.2vw,
+      82px
+    );
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.055em;
+
+  font-weight:
+    900;
+
+  color:
+    #f8fafc;
+
+  animation:
+    rzFadeUp
+    850ms
+    100ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.rz-gradient-title {
+  display: inline-block;
+
+  color: transparent;
+
+  background:
+    linear-gradient(
+      100deg,
+      #818cf8 0%,
+      #a78bfa 30%,
+      #60a5fa 63%,
+      #22d3ee 100%
+    );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  text-shadow:
+    0 0 45px
+    rgba(99, 91, 255, 0.16);
+}
+
+.rz-hero-description {
+  max-width: 610px;
+
+  margin:
+    30px
+    0
+    0;
+
+  color:
+    #94a3b8;
+
+  font-size:
+    17px;
+
+  line-height:
+    1.8;
+
+  animation:
+    rzFadeUp
+    850ms
+    200ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.rz-hero-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-top:
+    34px;
+
+  animation:
+    rzFadeUp
+    850ms
+    300ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.rz-hero-main-button {
+  min-width: 160px;
+}
+
+.rz-hero-secondary-button {
+  min-width: 175px;
+}
+
+/* =========================================================
+   MINI TRUST
+   ========================================================= */
+
+.rz-hero-trust {
+  display: flex;
+
+  gap: 28px;
+
+  margin-top:
+    42px;
+
+  animation:
+    rzFadeUp
+    850ms
+    400ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.rz-trust-mini {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.rz-trust-mini-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(99, 91, 255, 0.25);
+
+  border-radius: 9px;
+
+  background:
+    rgba(99, 91, 255, 0.08);
+
+  color:
+    #a5b4fc;
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+.rz-trust-mini strong {
+  display: block;
+
+  color:
+    #e2e8f0;
+
+  font-size:
+    11px;
+}
+
+.rz-trust-mini div span {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    #64748b;
+
+  font-size:
+    9px;
+}
+
+/* =========================================================
+   RIGHT VISUAL
+   ========================================================= */
+
+.rz-hero-visual {
+  position: relative;
+
+  height: 610px;
+
+  perspective:
+    1400px;
+
+  transform-style:
+    preserve-3d;
+}
+
+.rz-visual-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 480px;
+  height: 480px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(99, 91, 255, 0.12);
+
+  filter:
+    blur(80px);
+
+  animation:
+    rzVisualGlow
+    5s
+    ease-in-out
+    infinite;
+}
+
+@keyframes rzVisualGlow {
+  0%,
+  100% {
+    opacity: 0.55;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.12);
+  }
+}
+
+/* =========================================================
+   ORBITS
+   ========================================================= */
+
+.rz-orbit {
+  position: absolute;
+
+  left: 50%;
+  top: 51%;
+
+  border:
+    1px
+    solid
+    rgba(129, 140, 248, 0.19);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  box-shadow:
+    inset
+    0
+    0
+    25px
+    rgba(99, 91, 255, 0.025);
+}
+
+.rz-orbit-1 {
+  width: 400px;
+  height: 400px;
+
+  animation:
+    rzOrbit1
+    25s
+    linear
+    infinite;
+}
+
+.rz-orbit-2 {
+  width: 510px;
+  height: 510px;
+
+  border-color:
+    rgba(99, 91, 255, 0.15);
+
+  animation:
+    rzOrbit2
+    32s
+    linear
+    infinite
+    reverse;
+}
+
+.rz-orbit-3 {
+  width: 620px;
+  height: 300px;
+
+  transform:
+    translate(-50%, -50%)
+    rotateX(68deg);
+
+  animation:
+    rzOrbit3
+    22s
+    linear
+    infinite;
+}
+
+.rz-orbit-4 {
+  width: 700px;
+  height: 360px;
+
+  border-color:
+    rgba(34, 211, 238, 0.09);
+
+  transform:
+    translate(-50%, -50%)
+    rotateX(68deg)
+    rotateZ(25deg);
+
+  animation:
+    rzOrbit4
+    30s
+    linear
+    infinite
+    reverse;
+}
+
+@keyframes rzOrbit1 {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+}
+
+@keyframes rzOrbit2 {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+}
+
+@keyframes rzOrbit3 {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(360deg);
+  }
+}
+
+@keyframes rzOrbit4 {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(25deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(385deg);
+  }
+}
+
+/* =========================================================
+   ORBIT DOTS
+   ========================================================= */
+
+.rz-orbit-dot {
+  position: absolute;
+
+  z-index: 12;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background:
+    #818cf8;
+
+  box-shadow:
+    0
+    0
+    14px
+    rgba(129, 140, 248, 0.9);
+}
+
+.rz-orbit-dot-1 {
+  left: 22%;
+  top: 28%;
+
+  animation:
+    rzDotFloat1
+    5s
+    ease-in-out
+    infinite;
+}
+
+.rz-orbit-dot-2 {
+  right: 17%;
+  top: 25%;
+
+  background:
+    #60a5fa;
+
+  box-shadow:
+    0
+    0
+    15px
+    rgba(96, 165, 250, 0.9);
+
+  animation:
+    rzDotFloat2
+    6s
+    ease-in-out
+    infinite;
+}
+
+.rz-orbit-dot-3 {
+  right: 28%;
+  bottom: 17%;
+
+  width: 6px;
+  height: 6px;
+
+  background:
+    #22d3ee;
+
+  animation:
+    rzDotFloat3
+    4s
+    ease-in-out
+    infinite;
+}
+
+@keyframes rzDotFloat1 {
+  0%,
+  100% {
+    transform:
+      translate(0, 0);
+  }
+
+  50% {
+    transform:
+      translate(15px, -22px);
+  }
+}
+
+@keyframes rzDotFloat2 {
+  0%,
+  100% {
+    transform:
+      translate(0, 0);
+  }
+
+  50% {
+    transform:
+      translate(-12px, 18px);
+  }
+}
+
+@keyframes rzDotFloat3 {
+  0%,
+  100% {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(10px, -14px)
+      scale(1.4);
+  }
+}
+
+/* =========================================================
+   MAIN CORE
+   ========================================================= */
+
+.rz-core {
+  position: absolute;
+
+  z-index: 20;
+
+  left: 50%;
+  top: 51%;
+
+  width: 330px;
+  height: 330px;
+
+  transform:
+    translate(-50%, -50%)
+    rotateX(8deg)
+    rotateY(-8deg);
+
+  transform-style:
+    preserve-3d;
+
+  animation:
+    rzCoreFloat
+    6s
+    ease-in-out
+    infinite;
+}
+
+@keyframes rzCoreFloat {
+  0%,
+  100% {
+    transform:
+      translate(-50%, -50%)
+      translateY(0)
+      rotateX(8deg)
+      rotateY(-8deg);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      translateY(-13px)
+      rotateX(5deg)
+      rotateY(8deg);
+  }
+}
+
+.rz-core-back {
+  position: absolute;
+
+  inset: 12px;
+
+  border:
+    1px
+    solid
+    rgba(129, 140, 248, 0.2);
+
+  border-radius:
+    38px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 41, 59, 0.9),
+      rgba(7, 11, 24, 0.98)
+    );
+
+  box-shadow:
+    0
+    40px
+    100px
+    rgba(0, 0, 0, 0.55),
+
+    inset
+    0
+    0
+    60px
+    rgba(99, 91, 255, 0.08);
+
+  transform:
+    translateZ(-35px);
+}
+
+.rz-core-depth {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius:
+    42px;
+
+  border:
+    1px
+    solid
+    rgba(99, 91, 255, 0.13);
+
+  background:
+    rgba(10, 15, 30, 0.8);
+}
+
+.rz-core-depth-1 {
+  transform:
+    translateZ(-25px);
+}
+
+.rz-core-depth-2 {
+  transform:
+    translateZ(-15px);
+}
+
+.rz-core-depth-3 {
+  transform:
+    translateZ(-7px);
+}
+
+.rz-core-face {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px
+    solid
+    rgba(129, 140, 248, 0.2);
+
+  border-radius:
+    42px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(19, 27, 49, 0.92),
+      rgba(7, 12, 26, 0.96)
+    );
+
+  box-shadow:
+    0
+    0
+    50px
+    rgba(99, 91, 255, 0.1),
+
+    inset
+    0
+    1px
+    0
+    rgba(255, 255, 255, 0.07);
+}
+
+.rz-core-logo {
+  width: 82px;
+  height: 82px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius:
+    24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #7568ff,
+      #4f46e5
+    );
+
+  box-shadow:
+    0
+    20px
+    45px
+    rgba(79, 70, 229, 0.4),
+
+    0
+    0
+    45px
+    rgba(99, 91, 255, 0.22);
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   RIZCENT LOGO — BLACK 3D CORE
+   ========================================================= */
+
+.rz-core-logo {
+  width: 125px;
+  height: 125px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 24px;
+
+  /* PURE BLACK */
+  background: #000000;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.65),
+    0 0 25px rgba(0, 0, 0, 0.45);
+
+  animation:
+    rzLogoPulse
+    4s
+    ease-in-out
+    infinite;
+}
+
+.rz-core-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  padding: 7px;
+
+  /* IMPORTANT:
+     Do not blend the black logo image
+     with the purple background. */
+  mix-blend-mode: normal;
+
+  filter: none;
+
+  opacity: 1;
+}
+
+@keyframes rzLogoPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.65),
+      0 0 20px rgba(0, 0, 0, 0.4);
+  }
+
+  100% {
+    box-shadow:
+      0 20px 45px rgba(0, 0, 0, 0.75),
+      0 0 30px rgba(255, 255, 255, 0.04);
+  }
+}
+
+.rz-core-company {
+  margin-top:
+    22px;
+
+  color:
+    #f8fafc;
+
+  font-size:
+    20px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    -0.03em;
+}
+
+.rz-core-subtitle {
+  margin-top:
+    8px;
+
+  color:
+    #64748b;
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.24em;
+}
+
+.rz-core-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top:
+    24px;
+
+  padding:
+    8px
+    13px;
+
+  border:
+    1px
+    solid
+    rgba(52, 211, 153, 0.18);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(16, 185, 129, 0.07);
+
+  color:
+    #34d399;
+
+  font-size:
+    7px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.12em;
+}
+
+.rz-core-status span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    #34d399;
+
+  box-shadow:
+    0
+    0
+    10px
+    #34d399;
+
+  animation:
+    rzStatusPulse
+    2s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   FLOATING CARDS
+   ========================================================= */
+
+.rz-floating-card {
+  position: absolute;
+
+  z-index: 40;
+
+  border:
+    1px
+    solid
+    rgba(148, 163, 184, 0.13);
+
+  border-radius:
+    15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(19, 27, 45, 0.95),
+      rgba(8, 12, 25, 0.94)
+    );
+
+  box-shadow:
+    0
+    25px
+    60px
+    rgba(0, 0, 0, 0.4),
+
+    inset
+    0
+    1px
+    0
+    rgba(255, 255, 255, 0.05);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+/* =========================================================
+   SECURITY
+   ========================================================= */
+
+.rz-security-card {
+  left:
+    5%;
+
+  top:
+    24%;
+
+  width:
+    205px;
+
+  padding:
+    17px;
+
+  animation:
+    rzSecurityFloat
+    5s
+    ease-in-out
+    infinite;
+}
+
+.rz-card-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color:
+    #64748b;
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.16em;
+}
+
+.rz-live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    #34d399;
+
+  box-shadow:
+    0
+    0
+    10px
+    #34d399;
+
+  animation:
+    rzStatusPulse
+    2s
+    ease-in-out
+    infinite;
+}
+
+.rz-security-content {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-top:
+    15px;
+}
+
+.rz-security-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius:
+    13px;
+
+  background:
+    rgba(16, 185, 129, 0.12);
+
+  color:
+    #34d399;
+
+  font-size:
+    18px;
+
+  font-weight:
+    900;
+}
+
+.rz-security-content strong {
+  display: block;
+
+  color:
+    #f8fafc;
+
+  font-size:
+    13px;
+}
+
+.rz-security-content span {
+  display: block;
+
+  margin-top:
+    3px;
+
+  color:
+    #475569;
+
+  font-size:
+    9px;
+}
+
+.rz-risk-bar {
+  height:
+    5px;
+
+  margin-top:
+    17px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    #1e293b;
+}
+
+.rz-risk-bar span {
+  display: block;
+
+  width:
+    88%;
+
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6366f1,
+      #22d3ee
+    );
+
+  box-shadow:
+    0
+    0
+    10px
+    rgba(34, 211, 238, 0.4);
+}
+
+.rz-risk-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top:
+    8px;
+
+  color:
+    #475569;
+
+  font-size:
+    8px;
+}
+
+.rz-risk-footer strong {
+  color:
+    #34d399;
+}
+
+@keyframes rzSecurityFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotateY(5deg);
+  }
+
+  50% {
+    transform:
+      translateY(-13px)
+      rotateY(-4deg);
+  }
+}
+
+/* =========================================================
+   ENGINEERING
+   ========================================================= */
+
+.rz-engineering-card {
+  right:
+    2%;
+
+  bottom:
+    18%;
+
+  width:
+    215px;
+
+  padding:
+    17px;
+
+  animation:
+    rzEngineeringFloat
+    6s
+    ease-in-out
+    infinite;
+}
+
+.rz-card-live {
+  color:
+    #a5b4fc;
+
+  font-size:
+    7px;
+}
+
+.rz-engineering-main {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top:
+    15px;
+}
+
+.rz-engineering-icon {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius:
+    12px;
+
+  background:
+    rgba(99, 91, 255, 0.13);
+
+  color:
+    #a5b4fc;
+
+  font-size:
+    17px;
+
+  font-weight:
+    900;
+}
+
+.rz-engineering-main strong {
+  display: block;
+
+  color:
+    #f8fafc;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.35;
+}
+
+.rz-engineering-main span {
+  display: block;
+
+  margin-top:
+    4px;
+
+  color:
+    #475569;
+
+  font-size:
+    8px;
+}
+
+.rz-mini-chart {
+  display: flex;
+
+  align-items: end;
+
+  gap: 5px;
+
+  height:
+    35px;
+
+  margin-top:
+    16px;
+}
+
+.rz-mini-chart span {
+  flex: 1;
+
+  border-radius:
+    3px
+    3px
+    0
+    0;
+
+  background:
+    linear-gradient(
+      to top,
+      #312e81,
+      #6366f1
+    );
+
+  box-shadow:
+    0
+    0
+    7px
+    rgba(99, 102, 241, 0.2);
+}
+
+@keyframes rzEngineeringFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotateY(-5deg);
+  }
+
+  50% {
+    transform:
+      translateY(-16px)
+      rotateY(4deg);
+  }
+}
+
+/* =========================================================
+   CLOUD
+   ========================================================= */
+
+.rz-cloud-card {
+  right:
+    8%;
+
+  top:
+    12%;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  width:
+    190px;
+
+  padding:
+    12px;
+
+  animation:
+    rzCloudFloat
+    7s
+    ease-in-out
+    infinite;
+}
+
+.rz-cloud-icon {
+  width:
+    38px;
+
+  height:
+    38px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+  justify-content:
+    center;
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(34, 211, 238, 0.08);
+
+  color:
+    #22d3ee;
+
+  font-size:
+    17px;
+}
+
+.rz-cloud-card > div:nth-child(2) span {
+  display:
+    block;
+
+  color:
+    #475569;
+
+  font-size:
+    6px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.12em;
+}
+
+.rz-cloud-card > div:nth-child(2) strong {
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  color:
+    white;
+
+  font-size:
+    10px;
+}
+
+.rz-cloud-status {
+  margin-left:
+    auto;
+
+  color:
+    #34d399;
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+}
+
+@keyframes rzCloudFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-11px);
+  }
+}
+
+/* =========================================================
+   TERMINAL
+   ========================================================= */
+
+.rz-terminal {
+  position:
+    absolute;
+
+  z-index:
+    35;
+
+  left:
+    1%;
+
+  bottom:
+    8%;
+
+  width:
+    205px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px
+    solid
+    rgba(148, 163, 184, 0.1);
+
+  border-radius:
+    13px;
+
+  background:
+    rgba(4, 8, 18, 0.9);
+
+  box-shadow:
+    0
+    25px
+    60px
+    rgba(0, 0, 0, 0.4);
+
+  animation:
+    rzTerminalFloat
+    8s
+    ease-in-out
+    infinite;
+}
+
+.rz-terminal-top {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding:
+    9px
+    11px;
+
+  border-bottom:
+    1px
+    solid
+    rgba(148, 163, 184, 0.08);
+
+  color:
+    #475569;
+
+  font-family:
+    monospace;
+
+  font-size:
+    7px;
+}
+
+.rz-terminal-dots {
+  display:
+    flex;
+
+  gap:
+    4px;
+}
+
+.rz-terminal-dots span {
+  width:
+    5px;
+
+  height:
+    5px;
+
+  border-radius:
+    50%;
+
+  background:
+    #334155;
+}
+
+.rz-terminal-body {
+  padding:
+    11px;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:
+    7px;
+
+  line-height:
+    1.8;
+}
+
+.rz-terminal-body p {
+  margin:
+    0;
+
+  color:
+    #64748b;
+}
+
+.rz-terminal-body em {
+  color:
+    #334155;
+
+  font-style:
+    normal;
+}
+
+.rz-terminal-body b {
+  color:
+    #818cf8;
+}
+
+.rz-terminal-body strong {
+  color:
+    #22d3ee;
+}
+
+.rz-terminal-green {
+  color:
+    #34d399;
+}
+
+@keyframes rzTerminalFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-10px);
+  }
+}
+
+/* =========================================================
+   ENERGY POINTS
+   ========================================================= */
+
+.rz-energy-point,
+.rz-blue-point {
+  position:
+    absolute;
+
+  z-index:
+    15;
+
+  border-radius:
+    50%;
+}
+
+.rz-energy-point {
+  left:
+    18%;
+
+  top:
+    19%;
+
+  width:
+    8px;
+
+  height:
+    8px;
+
+  background:
+    #fb923c;
+
+  box-shadow:
+    0
+    0
+    12px
+    #fb923c,
+    0
+    0
+    35px
+    rgba(251, 146, 60, 0.5);
+
+  animation:
+    rzEnergyPulse
+    3s
+    ease-in-out
+    infinite;
+}
+
+.rz-blue-point {
+  right:
+    11%;
+
+  bottom:
+    30%;
+
+  width:
+    6px;
+
+  height:
+    6px;
+
+  background:
+    #22d3ee;
+
+  box-shadow:
+    0
+    0
+    12px
+    #22d3ee;
+
+  animation:
+    rzEnergyPulse
+    4s
+    ease-in-out
+    infinite
+    reverse;
+}
+
+@keyframes rzEnergyPulse {
+  0%,
+  100% {
+    transform:
+      scale(0.7);
+
+    opacity:
+      0.5;
+  }
+
+  50% {
+    transform:
+      scale(1.5);
+
+    opacity:
+      1;
+  }
+}
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.rz-particles {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+}
+
+.rz-particles span {
+  position:
+    absolute;
+
+  width:
+    3px;
+
+  height:
+    3px;
+
+  border-radius:
+    50%;
+
+  background:
+    #818cf8;
+
+  box-shadow:
+    0
+    0
+    10px
+    rgba(129, 140, 248, 0.8);
+
+  animation:
+    rzParticleFloat
+    6s
+    ease-in-out
+    infinite;
+}
+
+.rz-particles span:nth-child(1) {
+  left: 8%;
+  top: 25%;
+}
+
+.rz-particles span:nth-child(2) {
+  left: 19%;
+  top: 72%;
+  animation-delay: -2s;
+}
+
+.rz-particles span:nth-child(3) {
+  left: 35%;
+  top: 19%;
+  animation-delay: -4s;
+}
+
+.rz-particles span:nth-child(4) {
+  left: 48%;
+  top: 80%;
+  animation-delay: -1s;
+}
+
+.rz-particles span:nth-child(5) {
+  left: 61%;
+  top: 18%;
+  animation-delay: -3s;
+}
+
+.rz-particles span:nth-child(6) {
+  left: 76%;
+  top: 30%;
+  animation-delay: -5s;
+}
+
+.rz-particles span:nth-child(7) {
+  left: 91%;
+  top: 52%;
+  animation-delay: -2s;
+}
+
+.rz-particles span:nth-child(8) {
+  left: 72%;
+  top: 80%;
+  animation-delay: -4s;
+}
+
+.rz-particles span:nth-child(9) {
+  left: 53%;
+  top: 42%;
+  animation-delay: -3s;
+}
+
+.rz-particles span:nth-child(10) {
+  left: 28%;
+  top: 46%;
+  animation-delay: -5s;
+}
+
+.rz-particles span:nth-child(11) {
+  left: 84%;
+  top: 16%;
+  background:
+    #22d3ee;
+}
+
+.rz-particles span:nth-child(12) {
+  left: 14%;
+  top: 54%;
+  background:
+    #fb923c;
+
+  box-shadow:
+    0
+    0
+    10px
+    rgba(251, 146, 60, 0.7);
+}
+
+@keyframes rzParticleFloat {
+  0%,
+  100% {
+    opacity:
+      0.2;
+
+    transform:
+      translateY(0)
+      scale(0.8);
+  }
+
+  50% {
+    opacity:
+      1;
+
+    transform:
+      translateY(-25px)
+      scale(1.4);
+  }
+}
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.rz-scroll-cue {
+  position:
+    absolute;
+
+  z-index:
+    20;
+
+  left:
+    50%;
+
+  bottom:
+    22px;
+
+  transform:
+    translateX(-50%);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  color:
+    #475569;
+
+  font-size:
+    7px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.2em;
+}
+
+.rz-scroll-line {
+  width:
+    32px;
+
+  height:
+    1px;
+
+  background:
+    #334155;
+}
+
+/* =========================================================
+   FADE
+   ========================================================= */
+
+@keyframes rzFadeUp {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(22px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes rzStatusPulse {
+  0%,
+  100% {
+    opacity:
+      0.45;
+
+    transform:
+      scale(0.9);
+  }
+
+  50% {
+    opacity:
+      1;
+
+    transform:
+      scale(1.15);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .rz-hero-container {
+    width:
+      min(
+        100% - 50px,
+        1100px
+      );
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap:
+      0;
+  }
+
+  .rz-hero-title {
+    font-size:
+      clamp(
+        45px,
+        5vw,
+        68px
+      );
+  }
+
+  .rz-hero-visual {
+    height:
+      560px;
+  }
+
+  .rz-core {
+    width:
+      290px;
+
+    height:
+      290px;
+  }
+
+  .rz-security-card {
+    left:
+      0;
+  }
+
+  .rz-engineering-card {
+    right:
+      0;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .rz-hero {
+    min-height:
+      1050px;
+  }
+
+  .rz-hero-container {
+    width:
+      min(
+        100% - 35px,
+        720px
+      );
+
+    grid-template-columns:
+      1fr;
+
+    padding-top:
+      120px;
+  }
+
+  .rz-hero-copy {
+    max-width:
+      680px;
+
+    margin:
+      0
+      auto;
+
+    text-align:
+      center;
+  }
+
+  .rz-hero-badge {
+    margin:
+      0
+      auto;
+  }
+
+  .rz-hero-description {
+    margin-left:
+      auto;
+
+    margin-right:
+      auto;
+  }
+
+  .rz-hero-actions {
+    justify-content:
+      center;
+  }
+
+  .rz-hero-trust {
+    justify-content:
+      center;
+  }
+
+  .rz-hero-visual {
+    height:
+      570px;
+
+    margin-top:
+      -10px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .rz-hero {
+    min-height:
+      980px;
+  }
+
+  .rz-hero-container {
+    width:
+      calc(
+        100% - 24px
+      );
+
+    padding-top:
+      105px;
+
+    padding-bottom:
+      60px;
+  }
+
+  .rz-hero-badge {
+    font-size:
+      8px;
+
+    letter-spacing:
+      0.11em;
+  }
+
+  .rz-hero-title {
+    margin-top:
+      25px;
+
+    font-size:
+      clamp(
+        39px,
+        12vw,
+        58px
+      );
+  }
+
+  .rz-hero-description {
+    margin-top:
+      22px;
+
+    font-size:
+      13px;
+
+    line-height:
+      1.7;
+  }
+
+  .rz-hero-actions {
+    flex-direction:
+      column;
+
+    width:
+      100%;
+  }
+
+  .rz-hero-main-button,
+  .rz-hero-secondary-button {
+    width:
+      min(
+        100%,
+        290px
+      );
+  }
+
+  .rz-hero-trust {
+    flex-direction:
+      column;
+
+    align-items:
+      center;
+
+    gap:
+      15px;
+
+    margin-top:
+      27px;
+  }
+
+  .rz-hero-visual {
+    height:
+      400px;
+
+    margin-top:
+      15px;
+  }
+
+  .rz-core {
+    width:
+      205px;
+
+    height:
+      205px;
+  }
+
+  .rz-core-face,
+  .rz-core-depth,
+  .rz-core-back {
+    border-radius:
+      28px;
+  }
+
+  .rz-core-logo {
+    width:
+      55px;
+
+    height:
+      55px;
+
+    border-radius:
+      16px;
+  }
+
+  .rz-core-logo img {
+    padding:
+      7px;
+  }
+
+  .rz-core-company {
+    margin-top:
+      13px;
+
+    font-size:
+      15px;
+  }
+
+  .rz-core-subtitle {
+    font-size:
+      6px;
+  }
+
+  .rz-core-status {
+    margin-top:
+      14px;
+
+    padding:
+      6px
+      9px;
+
+    font-size:
+      5px;
+  }
+
+  .rz-orbit-1 {
+    width:
+      250px;
+
+    height:
+      250px;
+  }
+
+  .rz-orbit-2 {
+    width:
+      320px;
+
+    height:
+      320px;
+  }
+
+  .rz-orbit-3 {
+    width:
+      400px;
+
+    height:
+      190px;
+  }
+
+  .rz-orbit-4 {
+    width:
+      450px;
+
+    height:
+      220px;
+  }
+
+  .rz-security-card {
+    left:
+      0;
+
+    top:
+      15%;
+
+    width:
+      150px;
+
+    padding:
+      11px;
+
+    transform:
+      scale(0.8);
+
+    transform-origin:
+      left center;
+  }
+
+  .rz-engineering-card {
+    right:
+      0;
+
+    bottom:
+      12%;
+
+    width:
+      155px;
+
+    padding:
+      11px;
+
+    transform:
+      scale(0.8);
+
+    transform-origin:
+      right center;
+  }
+
+  .rz-cloud-card {
+    right:
+      0;
+
+    top:
+      2%;
+
+    width:
+      140px;
+
+    padding:
+      9px;
+
+    transform:
+      scale(0.78);
+
+    transform-origin:
+      right top;
+  }
+
+  .rz-terminal {
+    left:
+      0;
+
+    bottom:
+      3%;
+
+    width:
+      150px;
+
+    transform:
+      scale(0.75);
+
+    transform-origin:
+      left bottom;
+  }
+
+  .rz-scroll-cue {
+    display:
+      none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .rz-hero *,
+  .rz-hero::before,
+  .rz-hero::after {
+    animation:
+      none !important;
+
+    transition:
+      none !important;
+  }
+}

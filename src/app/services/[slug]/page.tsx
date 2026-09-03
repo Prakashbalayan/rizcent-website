@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import ServiceHero from "@/components/services/ServiceHero";
 import { prisma } from "@/lib/prisma";
 
 interface ServicePageProps {
@@ -56,42 +57,23 @@ export default async function ServiceDetailsPage({
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-950 text-white">
-        <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-600/20 blur-[120px]" />
-
-        <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
-
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+      <div className="relative bg-slate-950">
+        <div className="relative z-20 mx-auto max-w-7xl px-5 pt-8 sm:px-6 lg:px-8">
           <Link
             href="/services"
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-white"
           >
             ← Back to Services
           </Link>
-
-          <div className="mt-10 max-w-4xl">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-300">
-                {service.category}
-              </span>
-
-              {service.featured && (
-                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300">
-                  Featured
-                </span>
-              )}
-            </div>
-
-            <h1 className="mt-7 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              {service.title}
-            </h1>
-
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 sm:text-xl">
-              {service.shortDescription}
-            </p>
-          </div>
         </div>
-      </section>
+
+        <ServiceHero
+          eyebrow={service.category}
+          title={service.title}
+          description={service.shortDescription}
+          accent={service.category.toLowerCase().includes("security") ? "cyan" : "blue"}
+        />
+      </div>
 
       {/* Description */}
       <section className="py-20 sm:py-24">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   {
@@ -27,27 +27,144 @@ const navLinks = [
   },
 ];
 
+interface CurrentUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export default function Navbar() {
   const pathname = usePathname();
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+
+  /* =========================================================
+     CURRENT USER
+     ========================================================= */
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadCurrentUser() {
+      try {
+        const response = await fetch("/api/auth/me", {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          if (mounted) {
+            setUser(null);
+          }
+
+          return;
+        }
+
+        const data = await response.json();
+
+        if (mounted && data.authenticated && data.user) {
+          setUser(data.user);
+        } else if (mounted) {
+          setUser(null);
+        }
+      } catch {
+        if (mounted) {
+          setUser(null);
+        }
+      } finally {
+        if (mounted) {
+          setAuthLoading(false);
+        }
+      }
+    }
+
+    loadCurrentUser();
+
+    return () => {
+      mounted = false;
+    };
+  }, [pathname]);
+
+  /* =========================================================
+     SCROLL EFFECT
+     ========================================================= */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 18);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  /* =========================================================
+     CLOSE MOBILE MENU
+     ========================================================= */
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  /* =========================================================
+     ACTIVE LINK
+     ========================================================= */
 
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
     }
 
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
   };
 
+  /* =========================================================
+     ACCOUNT
+     ========================================================= */
+
+  const accountLabel = user
+    ? user.name.split(" ")[0] || "Account"
+    : "Login";
+
+  const accountHref = user
+    ? "/account"
+    : "/login";
+
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 lg:px-6">
-      {/* ================================================================ */}
-      {/* Ambient navbar glow                                              */}
-      {/* ================================================================ */}
+    <header
+      className={`
+        sticky
+        top-0
+        z-50
+        px-3
+        pt-3
+        transition-all
+        duration-500
+        sm:px-5
+        lg:px-6
+        ${
+          scrolled
+            ? "pt-2"
+            : "pt-3"
+        }
+      `}
+    >
+      {/* =====================================================
+          OUTER AMBIENT GLOW
+          ===================================================== */}
 
       <div
         aria-hidden="true"
@@ -55,36 +172,61 @@ export default function Navbar() {
           pointer-events-none
           absolute
           left-1/2
-          top-0
-          h-24
-          w-[min(900px,90vw)]
+          top-[-30px]
+          h-32
+          w-[min(900px,95vw)]
           -translate-x-1/2
           rounded-full
-          bg-indigo-500/[0.05]
+          bg-indigo-500/[0.08]
           blur-3xl
         "
       />
 
-      {/* ================================================================ */}
-      {/* Navbar                                                           */}
-      {/* ================================================================ */}
+      {/* Cyan glow */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          left-[28%]
+          top-0
+          h-20
+          w-40
+          rounded-full
+          bg-cyan-400/[0.035]
+          blur-3xl
+        "
+      />
+
+      {/* =====================================================
+          MAIN NAVBAR
+          ===================================================== */}
 
       <div
-        className="
+        className={`
           relative
           mx-auto
           w-full
-          max-w-[1380px]
+          max-w-[1420px]
           overflow-hidden
           rounded-[24px]
           border
-          border-slate-200/80
-          bg-white/[0.94]
-          shadow-[0_10px_40px_rgba(15,23,42,0.07)]
+          border-white/70
+          bg-white/[0.92]
           backdrop-blur-2xl
-        "
+          transition-all
+          duration-500
+          ${
+            scrolled
+              ? "shadow-[0_16px_55px_rgba(15,23,42,0.13)]"
+              : "shadow-[0_10px_40px_rgba(15,23,42,0.08)]"
+          }
+        `}
       >
-        {/* Very subtle top highlight */}
+        {/* ===================================================
+            TOP LIGHT
+            =================================================== */}
+
         <div
           aria-hidden="true"
           className="
@@ -95,73 +237,133 @@ export default function Navbar() {
             h-px
             bg-gradient-to-r
             from-transparent
-            via-indigo-400/40
+            via-indigo-500/60
             to-transparent
           "
         />
 
-        {/* ============================================================ */}
-        {/* Main navigation                                               */}
-        {/* ============================================================ */}
+        {/* ===================================================
+            ANIMATED LIGHT SWEEP
+            =================================================== */}
 
-        <div className="flex h-[72px] items-center justify-between px-4 sm:px-6 lg:px-7">
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            absolute
+            inset-y-0
+            left-[-35%]
+            z-0
+            w-[20%]
+            -skew-x-12
+            bg-gradient-to-r
+            from-transparent
+            via-white/40
+            to-transparent
+            opacity-0
+            transition-all
+            duration-[1200ms]
+            hover:left-[120%]
+            hover:opacity-100
+          "
+        />
 
-          {/* ======================================================== */}
-          {/* Logo                                                       */}
-          {/* ======================================================== */}
+        {/* ===================================================
+            NAVBAR MAIN ROW
+            =================================================== */}
+
+        <div
+          className="
+            relative
+            z-10
+            flex
+            h-[72px]
+            items-center
+            justify-between
+            px-4
+            sm:px-6
+            lg:px-7
+          "
+        >
+          {/* =================================================
+              LOGO
+              ================================================= */}
 
           <Link
             href="/"
             onClick={closeMenu}
-            className="group flex shrink-0 items-center gap-3"
+            className="
+              group
+              flex
+              shrink-0
+              items-center
+              gap-3
+            "
           >
-            {/* Mark */}
+            {/* Logo mark */}
+
             <div
               className="
                 relative
                 flex
-                h-10
-                w-10
+                h-11
+                w-11
+                shrink-0
                 items-center
                 justify-center
                 overflow-hidden
-                rounded-[13px]
-                bg-[#090d1a]
-                text-sm
-                font-bold
-                text-white
-                shadow-[0_8px_24px_rgba(15,23,42,0.15)]
+                rounded-[14px]
+                border
+                border-slate-200/60
+                bg-black
+                shadow-[0_8px_24px_rgba(15,23,42,0.20)]
                 transition-all
-                duration-300
+                duration-500
                 group-hover:-translate-y-0.5
-                group-hover:shadow-[0_12px_30px_rgba(79,70,229,0.25)]
+                group-hover:scale-[1.03]
+                group-hover:shadow-[0_14px_35px_rgba(79,70,229,0.28)]
               "
             >
-              {/* Logo letter */}
-              <span className="relative z-20 text-white">
-                R
-              </span>
+              {/* Logo */}
 
-              {/* Indigo glow */}
+              <img
+                src="/rizcent-logo.png"
+                alt="Rizcent"
+                className="
+                  relative
+                  z-20
+                  h-full
+                  w-full
+                  object-contain
+                  p-1
+                  transition-transform
+                  duration-500
+                  group-hover:scale-105
+                "
+              />
+
+              {/* Purple glow */}
+
               <span
                 aria-hidden="true"
                 className="
                   pointer-events-none
                   absolute
-                  -right-3
-                  -top-3
-                  h-10
-                  w-10
+                  -right-4
+                  -top-4
+                  h-12
+                  w-12
                   rounded-full
-                  bg-indigo-500/40
+                  bg-indigo-500/20
                   blur-xl
                   transition-all
                   duration-500
-                  group-hover:bg-cyan-400/50
+                  group-hover:bg-cyan-400/25
                 "
               />
 
-              {/* Cyan edge */}
+              {/* Bottom cyan edge */}
+
               <span
                 aria-hidden="true"
                 className="
@@ -170,6 +372,7 @@ export default function Navbar() {
                   bottom-0
                   left-2
                   right-2
+                  z-30
                   h-px
                   bg-gradient-to-r
                   from-transparent
@@ -180,14 +383,18 @@ export default function Navbar() {
               />
             </div>
 
-            {/* Wordmark */}
+            {/* Brand */}
+
             <div className="leading-none">
               <div
                 className="
                   text-[18px]
-                  font-bold
+                  font-black
                   tracking-[-0.045em]
                   text-slate-950
+                  transition-colors
+                  duration-300
+                  group-hover:text-indigo-700
                 "
               >
                 Rizcent
@@ -197,10 +404,13 @@ export default function Navbar() {
                 className="
                   mt-1.5
                   text-[8px]
-                  font-semibold
+                  font-bold
                   uppercase
-                  tracking-[0.28em]
+                  tracking-[0.30em]
                   text-slate-400
+                  transition-colors
+                  duration-300
+                  group-hover:text-indigo-400
                 "
               >
                 Technologies
@@ -208,21 +418,23 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* ======================================================== */}
-          {/* Desktop navigation                                         */}
-          {/* ======================================================== */}
+          {/* =================================================
+              DESKTOP NAVIGATION
+              ================================================= */}
 
           <nav className="hidden lg:flex">
             <div
               className="
+                relative
                 flex
                 items-center
-                gap-0.5
+                gap-1
                 rounded-full
                 border
                 border-slate-200/80
-                bg-slate-50/80
+                bg-slate-100/70
                 p-1
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]
               "
             >
               {navLinks.map((link) => {
@@ -232,43 +444,67 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    prefetch
                     className={`
                       group
                       relative
                       rounded-full
                       px-4
                       py-2.5
-                      text-[13px]
-                      font-medium
+                      text-[12px]
+                      font-semibold
+                      tracking-[-0.01em]
                       transition-all
                       duration-300
                       ${
                         active
-                          ? "bg-white text-slate-950 shadow-[0_3px_12px_rgba(15,23,42,0.07)]"
-                          : "text-slate-600 hover:bg-white hover:text-slate-950 hover:shadow-[0_3px_12px_rgba(15,23,42,0.05)]"
+                          ? "bg-white text-slate-950 shadow-[0_4px_14px_rgba(15,23,42,0.09)]"
+                          : "text-slate-500 hover:bg-white/90 hover:text-slate-950 hover:shadow-[0_4px_14px_rgba(15,23,42,0.05)]"
                       }
                     `}
                   >
+                    {/* Hover glow */}
+
+                    <span
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        rounded-full
+                        bg-gradient-to-r
+                        from-indigo-500/[0.05]
+                        to-cyan-400/[0.05]
+                        opacity-0
+                        transition-opacity
+                        duration-300
+                        group-hover:opacity-100
+                      "
+                    />
+
                     <span className="relative z-10">
                       {link.label}
                     </span>
 
-                    {/* Active / hover indicator */}
+                    {/* Active indicator */}
+
                     <span
                       aria-hidden="true"
                       className={`
                         absolute
-                        bottom-1
+                        bottom-[5px]
                         left-1/2
                         h-[2px]
                         -translate-x-1/2
                         rounded-full
-                        bg-indigo-500
+                        bg-gradient-to-r
+                        from-indigo-500
+                        to-cyan-400
                         transition-all
                         duration-300
                         ${
                           active
-                            ? "w-4 opacity-100"
+                            ? "w-5 opacity-100"
                             : "w-0 opacity-0 group-hover:w-4 group-hover:opacity-100"
                         }
                       `}
@@ -279,33 +515,117 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* ======================================================== */}
-          {/* Desktop actions                                             */}
-          {/* ======================================================== */}
+          {/* =================================================
+              DESKTOP RIGHT ACTIONS
+              ================================================= */}
 
-          <div className="hidden items-center gap-4 lg:flex">
-
+          <div className="hidden items-center gap-2.5 lg:flex">
             {/* Contact */}
+
             <Link
               href="/contact"
+              prefetch
               className="
+                group
                 relative
-                px-2
-                py-2
-                text-[13px]
-                font-medium
+                flex
+                items-center
+                gap-1.5
+                rounded-full
+                px-3
+                py-2.5
+                text-[12px]
+                font-semibold
                 text-slate-500
-                transition-colors
-                duration-200
+                transition-all
+                duration-300
+                hover:bg-slate-50
                 hover:text-slate-950
               "
             >
-              Contact
+              <span>Contact</span>
+
+              <span
+                className="
+                  text-[10px]
+                  text-slate-300
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-0.5
+                  group-hover:text-indigo-500
+                "
+              >
+                →
+              </span>
             </Link>
 
-            {/* ==================================================== */}
-            {/* Get a Quote                                            */}
-            {/* ==================================================== */}
+            {/* =================================================
+                ACCOUNT
+                ================================================= */}
+
+            {!authLoading && (
+              <Link
+                href={accountHref}
+                prefetch
+                className="
+                  group
+                  relative
+                  flex
+                  h-10
+                  items-center
+                  gap-2
+                  overflow-hidden
+                  rounded-full
+                  border
+                  border-slate-200
+                  bg-white
+                  px-4
+                  text-[12px]
+                  font-bold
+                  !text-slate-800
+                  shadow-[0_3px_12px_rgba(15,23,42,0.06)]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:border-indigo-200
+                  hover:bg-indigo-50
+                  hover:!text-indigo-700
+                  hover:shadow-[0_8px_22px_rgba(79,70,229,0.12)]
+                "
+              >
+                {/* Account live dot */}
+
+                <span
+                  className="
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-emerald-500
+                    shadow-[0_0_8px_rgba(16,185,129,0.65)]
+                  "
+                />
+
+                <span className="relative z-10">
+                  {accountLabel}
+                </span>
+
+                <span
+                  className="
+                    text-slate-300
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-0.5
+                    group-hover:text-indigo-500
+                  "
+                >
+                  →
+                </span>
+              </Link>
+            )}
+
+            {/* =================================================
+                GET A QUOTE
+                ================================================= */}
 
             <Link
               href="/request-quote"
@@ -321,26 +641,32 @@ export default function Navbar() {
                 overflow-hidden
                 rounded-full
                 border
-                border-indigo-500/20
-                bg-indigo-600
+                border-indigo-400/30
+                bg-gradient-to-r
+                from-indigo-600
+                via-indigo-600
+                to-violet-600
                 px-6
-                text-[13px]
-                font-semibold
-                text-white
-                shadow-[0_8px_24px_rgba(79,70,229,0.22)]
+                text-[12px]
+                font-bold
+                !text-white
+                shadow-[0_8px_25px_rgba(79,70,229,0.28)]
                 transition-all
                 duration-300
                 hover:-translate-y-0.5
-                hover:bg-indigo-700
-                hover:text-white
-                hover:shadow-[0_14px_32px_rgba(79,70,229,0.30)]
+                hover:from-indigo-500
+                hover:via-violet-600
+                hover:to-indigo-600
+                hover:!text-white
+                hover:shadow-[0_15px_35px_rgba(79,70,229,0.38)]
                 focus:outline-none
                 focus:ring-2
                 focus:ring-indigo-500/30
                 focus:ring-offset-2
               "
             >
-              {/* Shine animation */}
+              {/* Animated shine */}
+
               <span
                 aria-hidden="true"
                 className="
@@ -353,7 +679,7 @@ export default function Navbar() {
                   -skew-x-12
                   bg-gradient-to-r
                   from-transparent
-                  via-white/30
+                  via-white/35
                   to-transparent
                   transition-all
                   duration-700
@@ -362,7 +688,8 @@ export default function Navbar() {
                 "
               />
 
-              {/* Inner border */}
+              {/* Glow */}
+
               <span
                 aria-hidden="true"
                 className="
@@ -370,23 +697,27 @@ export default function Navbar() {
                   absolute
                   inset-0
                   rounded-full
-                  ring-1
-                  ring-inset
-                  ring-white/10
+                  opacity-0
+                  shadow-[inset_0_0_25px_rgba(255,255,255,0.12)]
+                  transition-opacity
+                  duration-300
+                  group-hover:opacity-100
                 "
               />
 
               {/* Text */}
-              <span className="relative z-10 whitespace-nowrap text-white">
+
+              <span className="relative z-10 whitespace-nowrap !text-white">
                 Get a Quote
               </span>
 
               {/* Arrow */}
+
               <span
                 className="
                   relative
                   z-10
-                  text-white
+                  !text-white
                   transition-transform
                   duration-300
                   group-hover:translate-x-1
@@ -397,30 +728,39 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* ======================================================== */}
-          {/* Mobile menu button                                          */}
-          {/* ======================================================== */}
+          {/* =================================================
+              MOBILE MENU BUTTON
+              ================================================= */}
 
           <button
             type="button"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={
+              menuOpen
+                ? "Close menu"
+                : "Open menu"
+            }
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() =>
+              setMenuOpen((open) => !open)
+            }
             className="
+              group
               relative
               flex
-              h-10
-              w-10
+              h-11
+              w-11
               items-center
               justify-center
-              rounded-xl
+              overflow-hidden
+              rounded-[14px]
               border
               border-slate-200
               bg-white
               text-slate-700
-              shadow-sm
+              shadow-[0_4px_14px_rgba(15,23,42,0.07)]
               transition-all
-              duration-200
+              duration-300
+              hover:-translate-y-0.5
               hover:border-indigo-200
               hover:bg-indigo-50
               hover:text-indigo-600
@@ -428,15 +768,39 @@ export default function Navbar() {
             "
           >
             <span className="sr-only">
-              {menuOpen ? "Close menu" : "Open menu"}
+              {menuOpen
+                ? "Close menu"
+                : "Open menu"}
             </span>
 
-            <span className="relative flex h-4 w-5 flex-col justify-between">
+            {/* Button glow */}
 
+            <span
+              aria-hidden="true"
+              className="
+                pointer-events-none
+                absolute
+                -right-4
+                -top-4
+                h-10
+                w-10
+                rounded-full
+                bg-indigo-500/10
+                blur-xl
+                transition-all
+                duration-300
+                group-hover:bg-cyan-400/20
+              "
+            />
+
+            {/* Hamburger */}
+
+            <span className="relative z-10 flex h-5 w-5 flex-col justify-between">
               {/* Top */}
+
               <span
                 className={`
-                  h-[1.5px]
+                  h-[2px]
                   w-full
                   rounded-full
                   bg-current
@@ -444,16 +808,17 @@ export default function Navbar() {
                   duration-300
                   ${
                     menuOpen
-                      ? "translate-y-[7px] rotate-45"
+                      ? "translate-y-[9px] rotate-45"
                       : ""
                   }
                 `}
               />
 
               {/* Middle */}
+
               <span
                 className={`
-                  h-[1.5px]
+                  h-[2px]
                   w-full
                   rounded-full
                   bg-current
@@ -461,16 +826,17 @@ export default function Navbar() {
                   duration-200
                   ${
                     menuOpen
-                      ? "opacity-0"
-                      : "opacity-100"
+                      ? "scale-0 opacity-0"
+                      : "scale-100 opacity-100"
                   }
                 `}
               />
 
               {/* Bottom */}
+
               <span
                 className={`
-                  h-[1.5px]
+                  h-[2px]
                   w-full
                   rounded-full
                   bg-current
@@ -478,106 +844,131 @@ export default function Navbar() {
                   duration-300
                   ${
                     menuOpen
-                      ? "-translate-y-[7px] -rotate-45"
+                      ? "-translate-y-[9px] -rotate-45"
                       : ""
                   }
                 `}
               />
-
             </span>
           </button>
         </div>
 
-        {/* ============================================================ */}
-        {/* Mobile menu                                                   */}
-        {/* ============================================================ */}
+        {/* ===================================================
+            MOBILE MENU
+            =================================================== */}
 
         <div
           className={`
+            relative
+            z-10
             overflow-hidden
             border-t
             border-slate-200/70
-            bg-white/95
+            bg-white/[0.96]
             backdrop-blur-2xl
             transition-all
-            duration-300
-            ease-out
+            duration-500
+            ease-[cubic-bezier(0.22,1,0.36,1)]
             lg:hidden
             ${
               menuOpen
-                ? "max-h-[720px] opacity-100"
+                ? "max-h-[900px] opacity-100"
                 : "max-h-0 opacity-0"
             }
           `}
         >
           <nav className="px-4 py-4 sm:px-6">
+            {/* Mobile nav links */}
 
-            {/* Mobile navigation */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
+              {navLinks.map(
+                (link, index) => {
+                  const active =
+                    isActive(link.href);
 
-              {navLinks.map((link, index) => {
-                const active = isActive(link.href);
-
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    prefetch
-                    onClick={closeMenu}
-                    className={`
-                      group
-                      flex
-                      items-center
-                      justify-between
-                      rounded-2xl
-                      px-4
-                      py-3.5
-                      text-sm
-                      font-medium
-                      transition-all
-                      duration-200
-                      ${
-                        active
-                          ? "bg-indigo-50 text-indigo-700"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-slate-950"
-                      }
-                    `}
-                    style={{
-                      transitionDelay: menuOpen
-                        ? `${index * 25}ms`
-                        : "0ms",
-                    }}
-                  >
-                    <span>
-                      {link.label}
-                    </span>
-
-                    <span
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      prefetch
+                      onClick={closeMenu}
                       className={`
+                        group
+                        flex
+                        items-center
+                        justify-between
+                        rounded-2xl
+                        border
+                        px-4
+                        py-3.5
+                        text-sm
+                        font-semibold
                         transition-all
-                        duration-200
-                        group-hover:translate-x-1
+                        duration-300
                         ${
                           active
-                            ? "text-indigo-500"
-                            : "text-slate-400 group-hover:text-indigo-500"
+                            ? "border-indigo-100 bg-indigo-50 !text-indigo-700 shadow-[0_4px_16px_rgba(79,70,229,0.08)]"
+                            : "border-transparent text-slate-700 hover:border-slate-200 hover:bg-slate-50 hover:text-slate-950"
                         }
                       `}
+                      style={{
+                        transitionDelay:
+                          menuOpen
+                            ? `${index * 35}ms`
+                            : "0ms",
+                      }}
                     >
-                      →
-                    </span>
-                  </Link>
-                );
-              })}
+                      <span className="flex items-center gap-3">
+                        {/* Number */}
+
+                        <span
+                          className={`
+                            text-[9px]
+                            font-black
+                            tracking-[0.15em]
+                            ${
+                              active
+                                ? "text-indigo-400"
+                                : "text-slate-300"
+                            }
+                          `}
+                        >
+                          0
+                          {index + 1}
+                        </span>
+
+                        <span>
+                          {link.label}
+                        </span>
+                      </span>
+
+                      <span
+                        className={`
+                          transition-all
+                          duration-300
+                          group-hover:translate-x-1
+                          ${
+                            active
+                              ? "text-indigo-500"
+                              : "text-slate-300 group-hover:text-indigo-500"
+                          }
+                        `}
+                      >
+                        →
+                      </span>
+                    </Link>
+                  );
+                },
+              )}
             </div>
 
-            {/* ====================================================== */}
-            {/* Mobile actions                                           */}
-            {/* ====================================================== */}
+            {/* =================================================
+                MOBILE ACTIONS
+                ================================================= */}
 
             <div className="mt-4 border-t border-slate-200 pt-4">
-
               {/* Contact */}
+
               <Link
                 href="/contact"
                 prefetch
@@ -591,10 +982,10 @@ export default function Navbar() {
                   px-4
                   py-3.5
                   text-sm
-                  font-medium
+                  font-semibold
                   text-slate-700
                   transition-all
-                  duration-200
+                  duration-300
                   hover:bg-slate-50
                   hover:text-slate-950
                 "
@@ -605,9 +996,9 @@ export default function Navbar() {
 
                 <span
                   className="
-                    text-slate-400
-                    transition-all
-                    duration-200
+                    text-slate-300
+                    transition-transform
+                    duration-300
                     group-hover:translate-x-1
                     group-hover:text-indigo-500
                   "
@@ -616,9 +1007,113 @@ export default function Navbar() {
                 </span>
               </Link>
 
-              {/* ================================================== */}
-              {/* Mobile quote CTA                                     */}
-              {/* ================================================== */}
+              {/* Account */}
+
+              {!authLoading && (
+                <Link
+                  href={accountHref}
+                  prefetch
+                  onClick={closeMenu}
+                  className="
+                    group
+                    mt-2
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-slate-200
+                    bg-white
+                    px-4
+                    py-3.5
+                    text-sm
+                    font-bold
+                    !text-slate-800
+                    shadow-sm
+                    transition-all
+                    duration-300
+                    hover:border-indigo-200
+                    hover:bg-indigo-50
+                    hover:!text-indigo-700
+                  "
+                >
+                  <span className="flex items-center gap-2.5">
+                    <span
+                      className="
+                        h-2
+                        w-2
+                        rounded-full
+                        bg-emerald-500
+                        shadow-[0_0_8px_rgba(16,185,129,0.55)]
+                      "
+                    />
+
+                    <span>
+                      {user
+                        ? `Account · ${accountLabel}`
+                        : "Login"}
+                    </span>
+                  </span>
+
+                  <span
+                    className="
+                      text-slate-300
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-1
+                      group-hover:text-indigo-500
+                    "
+                  >
+                    →
+                  </span>
+                </Link>
+              )}
+
+              {/* Register */}
+
+              {!authLoading && !user && (
+                <Link
+                  href="/register"
+                  prefetch
+                  onClick={closeMenu}
+                  className="
+                    group
+                    mt-2
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-indigo-100
+                    bg-indigo-50
+                    px-4
+                    py-3.5
+                    text-sm
+                    font-bold
+                    !text-indigo-700
+                    transition-all
+                    duration-300
+                    hover:border-indigo-200
+                    hover:bg-indigo-100
+                  "
+                >
+                  <span>
+                    Create Account
+                  </span>
+
+                  <span
+                    className="
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-1
+                    "
+                  >
+                    →
+                  </span>
+                </Link>
+              )}
+
+              {/* Quote */}
 
               <Link
                 href="/request-quote"
@@ -636,20 +1131,25 @@ export default function Navbar() {
                   overflow-hidden
                   rounded-2xl
                   border
-                  border-indigo-500/20
-                  bg-indigo-600
+                  border-indigo-400/30
+                  bg-gradient-to-r
+                  from-indigo-600
+                  to-violet-600
                   px-5
                   text-sm
-                  font-semibold
-                  text-white
-                  shadow-[0_10px_25px_rgba(79,70,229,0.22)]
+                  font-bold
+                  !text-white
+                  shadow-[0_10px_28px_rgba(79,70,229,0.25)]
                   transition-all
                   duration-300
-                  hover:bg-indigo-700
-                  hover:text-white
+                  hover:from-indigo-500
+                  hover:to-violet-500
+                  hover:!text-white
+                  hover:shadow-[0_15px_35px_rgba(79,70,229,0.32)]
                 "
               >
                 {/* Shine */}
+
                 <span
                   aria-hidden="true"
                   className="
@@ -662,7 +1162,7 @@ export default function Navbar() {
                     -skew-x-12
                     bg-gradient-to-r
                     from-transparent
-                    via-white/30
+                    via-white/35
                     to-transparent
                     transition-all
                     duration-700
@@ -670,7 +1170,7 @@ export default function Navbar() {
                   "
                 />
 
-                <span className="relative z-10 text-white">
+                <span className="relative z-10 !text-white">
                   Get a Quote
                 </span>
 
@@ -678,7 +1178,7 @@ export default function Navbar() {
                   className="
                     relative
                     z-10
-                    text-white
+                    !text-white
                     transition-transform
                     duration-300
                     group-hover:translate-x-1
@@ -687,6 +1187,35 @@ export default function Navbar() {
                   →
                 </span>
               </Link>
+
+              {/* Mobile status */}
+
+              <div
+                className="
+                  mt-4
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                  text-slate-400
+                "
+              >
+                <span
+                  className="
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-emerald-500
+                    shadow-[0_0_8px_rgba(16,185,129,0.65)]
+                  "
+                />
+
+                Systems Online
+              </div>
             </div>
           </nav>
         </div>

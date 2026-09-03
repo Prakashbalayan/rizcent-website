@@ -33,13 +33,37 @@ export default function Button({
 
   const content = (
     <>
-      {/* Background shine */}
+      {/* =====================================================
+          OUTER GLOW
+          ===================================================== */}
+
+      <span
+        aria-hidden="true"
+        className="rz-btn-glow"
+      />
+
+      {/* =====================================================
+          MOVING SHINE
+          ===================================================== */}
+
       <span
         aria-hidden="true"
         className="rz-btn-shine"
       />
 
-      {/* ALWAYS VISIBLE CONTENT */}
+      {/* =====================================================
+          TOP HIGHLIGHT
+          ===================================================== */}
+
+      <span
+        aria-hidden="true"
+        className="rz-btn-highlight"
+      />
+
+      {/* =====================================================
+          CONTENT
+          ===================================================== */}
+
       <span className="rz-btn-inner">
         <span className="rz-btn-label">
           {children}
@@ -50,10 +74,23 @@ export default function Button({
             aria-hidden="true"
             className="rz-btn-arrow"
           >
-            →
+            <span className="rz-btn-arrow-line" />
+
+            <span className="rz-btn-arrow-head">
+              →
+            </span>
           </span>
         )}
       </span>
+
+      {/* =====================================================
+          EDGE
+          ===================================================== */}
+
+      <span
+        aria-hidden="true"
+        className="rz-btn-edge"
+      />
     </>
   );
 

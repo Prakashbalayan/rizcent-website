@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/user-auth";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    // Get the currently logged-in customer.
+    // If the visitor is not logged in, user will be null.
+    const user = await getCurrentUser();
+
     const projectName = String(body.projectName ?? "").trim();
     const projectType = String(body.projectType ?? "").trim();
     const timeline = String(body.timeline ?? "").trim();
+
     const description = String(body.description ?? "").trim();
+
     const services = Array.isArray(body.services)
       ? body.services.map(String).join(", ")
       : String(body.services ?? "").trim();
+
     const budget = String(body.budget ?? "").trim();
     const name = String(body.name ?? "").trim();
     const company = String(body.company ?? "").trim();
@@ -49,6 +57,10 @@ export async function POST(request: Request) {
         company: company || null,
         email,
         phone: phone || null,
+
+        // Connect the request to the logged-in customer.
+        // Guest submissions remain supported because userId is optional.
+        userId: user?.id ?? null,
       },
     });
 

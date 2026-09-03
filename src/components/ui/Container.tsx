@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface ContainerProps {
   children: ReactNode;
@@ -12,8 +12,10 @@ export default function Container({
   return (
     <div
       className={[
-        "mx-auto w-full max-w-[1320px]",
-        "px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14",
+        "mx-auto w-full",
+        "max-w-[1440px]",
+        "px-5 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-16",
+        "relative",
         className,
       ]
         .filter(Boolean)

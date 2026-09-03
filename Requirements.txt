@@ -1,0 +1,26 @@
+## Requirements
+
+Before installing and running Rizcent Technologies locally, make sure the following are installed:
+
+- **Node.js** 20.x or later
+- **npm** 10.x or later
+- **PostgreSQL** 14.x or later
+- **Git**
+- A PostgreSQL database with a valid connection string
+
+### Required Environment Variables
+
+Create a `.env` file in the project root.
+
+Required configuration:
+
+```env
+DATABASE_URL="your-postgresql-connection-string"
+
+ADMIN_EMAIL="your-admin-email"
+ADMIN_PASSWORD="your-admin-password"
+
+node --version
+npm --version
+git --version
+psql --version

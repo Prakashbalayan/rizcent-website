@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/user-auth";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    // Get the currently logged-in customer.
+    // Guest visitors can still submit contact messages.
+    const user = await getCurrentUser();
 
     const name = String(body.name ?? "").trim();
     const email = String(body.email ?? "").trim();
@@ -28,6 +33,10 @@ export async function POST(request: Request) {
         phone: phone || null,
         company: company || null,
         message,
+
+        // Associate the message with the logged-in customer.
+        // Guest messages remain supported.
+        userId: user?.id ?? null,
       },
     });
 
