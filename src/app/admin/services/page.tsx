@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 
+import { prisma } from "@/lib/prisma";
 import DeleteServiceButton from "@/components/DeleteServiceButton";
 
 export const dynamic = "force-dynamic";
@@ -28,7 +28,6 @@ export default async function AdminServicesPage() {
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-8 text-white sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
         <header className="mb-8">
           <Link
             href="/admin/dashboard"
@@ -39,9 +38,9 @@ export default async function AdminServicesPage() {
 
           <div className="mt-8 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
                 Rizcent Admin
-              </div>
+              </p>
 
               <h1 className="mt-3 text-5xl font-bold tracking-tight">
                 Services
@@ -62,7 +61,6 @@ export default async function AdminServicesPage() {
           </div>
         </header>
 
-        {/* Stats */}
         <section className="mb-8 grid gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
             <div className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
@@ -95,12 +93,9 @@ export default async function AdminServicesPage() {
           </div>
         </section>
 
-        {/* Services */}
         <section className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03]">
           <div className="border-b border-white/10 px-6 py-6 sm:px-8">
-            <h2 className="text-xl font-bold">
-              All Services
-            </h2>
+            <h2 className="text-xl font-bold">All Services</h2>
 
             <p className="mt-1 text-sm text-slate-500">
               {services.length} service
@@ -115,8 +110,8 @@ export default async function AdminServicesPage() {
               </div>
 
               <p className="mt-2 text-sm text-slate-500">
-                Create your first service to start building your
-                service portfolio.
+                Create your first service to start building your service
+                portfolio.
               </p>
 
               <Link
@@ -134,7 +129,6 @@ export default async function AdminServicesPage() {
                   className="px-6 py-7 transition hover:bg-white/[0.02] sm:px-8"
                 >
                   <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-                    {/* Main */}
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-blue-400">
@@ -154,9 +148,7 @@ export default async function AdminServicesPage() {
                               : "bg-slate-500/10 text-slate-500"
                           }`}
                         >
-                          {service.published
-                            ? "Published"
-                            : "Draft"}
+                          {service.published ? "Published" : "Draft"}
                         </span>
                       </div>
 
@@ -170,7 +162,7 @@ export default async function AdminServicesPage() {
 
                       <div className="mt-5 flex flex-wrap gap-2">
                         {service.features
-                          .split("\n")
+                          .split(/\r?\n|,/)
                           .map((feature) => feature.trim())
                           .filter(Boolean)
                           .slice(0, 4)
@@ -189,7 +181,6 @@ export default async function AdminServicesPage() {
                       </div>
                     </div>
 
-                    {/* Actions */}
                     <div className="flex shrink-0 flex-wrap gap-3">
                       <Link
                         href={`/services/${service.slug}`}

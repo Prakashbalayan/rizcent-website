@@ -76,7 +76,7 @@ export default async function AdminProjectsPage() {
 
               <Link
                 href="/admin/projects/new"
-                className="inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
+                className="inline-flex items-center rounded-xl bg-black px-5 py-3 text-sm font-semibold text-blue-600 transition hover:blue-slate-200"
               >
                 + New Project
               </Link>
@@ -87,7 +87,7 @@ export default async function AdminProjectsPage() {
         </header>
 
         {/* Projects */}
-        <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+        <section className="overflow-hidden rounded-2xl border border-blue-500/10 bg-white/[0.03]">
 
           <div className="border-b border-white/10 px-6 py-5">
             <h2 className="font-semibold">

@@ -714,9 +714,9 @@ export default function AboutPage() {
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
                   href="/request-quote"
-                  className="group inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-indigo-600 transition-all duration-300 hover:-translate-y-1 hover:bg-slate-50 hover:shadow-xl"
+                  className="group inline-flex items-center justify-center rounded-full bg-black px-7 py-3.5 text-sm font-semibold text-indigo-600 transition-all duration-300 hover:-translate-y-1 hover:bg-slate-50 hover:shadow-xl"
                 >
-                  <span className="text-indigo-600">
+                  <span className="text-white-600">
                     Start a Project
                   </span>
 

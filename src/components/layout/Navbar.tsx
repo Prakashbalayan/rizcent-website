@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -292,133 +293,19 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={closeMenu}
-            className="
-              group
-              flex
-              shrink-0
-              items-center
-              gap-3
-            "
+            aria-label="Rizcent Technologies home"
+            className="group flex shrink-0 items-center"
           >
-            {/* Logo mark */}
-
-            <div
-              className="
-                relative
-                flex
-                h-11
-                w-11
-                shrink-0
-                items-center
-                justify-center
-                overflow-hidden
-                rounded-[14px]
-                border
-                border-slate-200/60
-                bg-black
-                shadow-[0_8px_24px_rgba(15,23,42,0.20)]
-                transition-all
-                duration-500
-                group-hover:-translate-y-0.5
-                group-hover:scale-[1.03]
-                group-hover:shadow-[0_14px_35px_rgba(79,70,229,0.28)]
-              "
-            >
-              {/* Logo */}
-
-              <img
-                src="/rizcent-logo.png"
-                alt="Rizcent"
-                className="
-                  relative
-                  z-20
-                  h-full
-                  w-full
-                  object-contain
-                  p-1
-                  transition-transform
-                  duration-500
-                  group-hover:scale-105
-                "
-              />
-
-              {/* Purple glow */}
-
-              <span
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-                  absolute
-                  -right-4
-                  -top-4
-                  h-12
-                  w-12
-                  rounded-full
-                  bg-indigo-500/20
-                  blur-xl
-                  transition-all
-                  duration-500
-                  group-hover:bg-cyan-400/25
-                "
-              />
-
-              {/* Bottom cyan edge */}
-
-              <span
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-                  absolute
-                  bottom-0
-                  left-2
-                  right-2
-                  z-30
-                  h-px
-                  bg-gradient-to-r
-                  from-transparent
-                  via-cyan-300/80
-                  to-transparent
-                  opacity-70
-                "
-              />
-            </div>
-
-            {/* Brand */}
-
-            <div className="leading-none">
-              <div
-                className="
-                  text-[18px]
-                  font-black
-                  tracking-[-0.045em]
-                  text-slate-950
-                  transition-colors
-                  duration-300
-                  group-hover:text-indigo-700
-                "
-              >
-                Rizcent
-              </div>
-
-              <div
-                className="
-                  mt-1.5
-                  text-[8px]
-                  font-bold
-                  uppercase
-                  tracking-[0.30em]
-                  text-slate-400
-                  transition-colors
-                  duration-300
-                  group-hover:text-indigo-400
-                "
-              >
-                Technologies
-              </div>
-            </div>
+            <Image
+              src="/rizcent-logonav.png"
+              alt="Rizcent Technologies"
+              width={230}
+              height={70}
+              priority
+              className="h-10 w-auto max-w-[220px] object-contain transition-transform duration-300 group-hover:scale-[1.03] sm:h-14"
+            />
           </Link>
-
-          {/* =================================================
+            {/* =================================================
               DESKTOP NAVIGATION
               ================================================= */}
 

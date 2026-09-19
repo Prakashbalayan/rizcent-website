@@ -140,7 +140,7 @@ export default async function BlogPage() {
 
             <Link
               href="/request-quote"
-              className="mt-8 inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-slate-100"
+              className="mt-8 inline-flex rounded-full bg-black px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-slate-100"
             >
               Request a Quote
             </Link>

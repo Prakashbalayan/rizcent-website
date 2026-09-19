@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/auth";
 
-async function isAdmin(request: NextRequest) {
+async function isAdmin(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get("admin_token")?.value;
 
   if (!token) {
@@ -66,18 +67,32 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    const slug = String(body.slug ?? "").trim().toLowerCase();
+    const slug = String(body.slug ?? "")
+      .trim()
+      .toLowerCase();
+
     const title = String(body.title ?? "").trim();
+
     const shortDescription = String(
       body.shortDescription ?? ""
     ).trim();
+
     const description = String(body.description ?? "").trim();
+
     const category = String(body.category ?? "").trim();
+
     const features = String(body.features ?? "").trim();
+
     const process = String(body.process ?? "").trim();
+
+    const imageUrl = String(body.imageUrl ?? "").trim();
+
     const featured = Boolean(body.featured);
+
     const published =
-      body.published === undefined ? true : Boolean(body.published);
+      body.published === undefined
+        ? true
+        : Boolean(body.published);
 
     if (
       !slug ||
@@ -122,6 +137,7 @@ export async function POST(request: NextRequest) {
         category,
         features,
         process,
+        imageUrl: imageUrl || null,
         featured,
         published,
       },

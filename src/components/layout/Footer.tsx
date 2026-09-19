@@ -62,17 +62,17 @@ const socials = [
   {
     label: "LinkedIn",
     short: "in",
-    href: "#",
+    href: "https://www.linkedin.com/company/rizcent-technologies/",
   },
   {
-    label: "X",
-    short: "X",
-    href: "#",
+    label: "Instagram",
+    short: "IG",
+    href: "https://www.instagram.com/rizcenttechnologies/",
   },
   {
     label: "GitHub",
     short: "GH",
-    href: "#",
+    href: "https://github.com/rizcent-technologies",
   },
 ];
 
@@ -604,21 +604,16 @@ export default function Footer() {
               {/* Logo */}
               <Link
                 href="/"
-                className="
-                  group
-                  relative
-                  inline-flex
-                  items-center
-                  gap-4
-                "
+                aria-label="Rizcent Technologies home"
+                className="group relative inline-flex items-center"
               >
                 <div
                   className="
                     footer-logo-box
                     relative
                     flex
-                    h-[68px]
-                    w-[68px]
+                    h-[76px]
+                    w-[220px]
                     shrink-0
                     items-center
                     justify-center
@@ -627,6 +622,7 @@ export default function Footer() {
                     border
                     border-white/[0.11]
                     bg-[#03050a]
+                    px-4
                     shadow-[0_20px_55px_rgba(0,0,0,0.5)]
                     transition-all
                     duration-500
@@ -636,7 +632,7 @@ export default function Footer() {
                   "
                 >
                   <img
-                    src="/rizcent-logo.png"
+                    src="/rizcent-logonav2.png"
                     alt="Rizcent Technologies"
                     className="
                       relative
@@ -644,10 +640,9 @@ export default function Footer() {
                       h-full
                       w-full
                       object-contain
-                      p-1
                       transition-transform
                       duration-500
-                      group-hover:scale-110
+                      group-hover:scale-105
                     "
                   />
 
@@ -656,13 +651,13 @@ export default function Footer() {
                     aria-hidden="true"
                     className="
                       absolute
-                      -right-6
-                      -top-6
-                      h-16
-                      w-16
+                      -right-8
+                      -top-8
+                      h-24
+                      w-24
                       rounded-full
                       bg-indigo-500/20
-                      blur-2xl
+                      blur-3xl
                       transition-all
                       duration-500
                       group-hover:bg-cyan-400/25
@@ -675,8 +670,8 @@ export default function Footer() {
                     className="
                       absolute
                       bottom-0
-                      left-2
-                      right-2
+                      left-5
+                      right-5
                       z-30
                       h-px
                       bg-gradient-to-r
@@ -686,35 +681,6 @@ export default function Footer() {
                       shadow-[0_0_10px_rgba(34,211,238,0.6)]
                     "
                   />
-                </div>
-
-                <div className="leading-none">
-                  <div
-                    className="
-                      text-2xl
-                      font-black
-                      tracking-[-0.055em]
-                      text-white
-                      transition-colors
-                      duration-300
-                      group-hover:text-cyan-300
-                    "
-                  >
-                    Rizcent
-                  </div>
-
-                  <div
-                    className="
-                      mt-2.5
-                      text-[8px]
-                      font-bold
-                      uppercase
-                      tracking-[0.32em]
-                      text-slate-500
-                    "
-                  >
-                    Technology &amp; Solutions
-                  </div>
                 </div>
               </Link>
 

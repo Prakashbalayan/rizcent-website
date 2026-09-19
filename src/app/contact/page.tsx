@@ -130,10 +130,10 @@ export default function ContactPage() {
                 </div>
 
                 <a
-                  href="mailto:hello@rizcent.com"
+                  href="mailto:info@rizcent.io"
                   className="mt-2 block font-semibold text-slate-950"
                 >
-                  hello@rizcent.com
+                  info@rizcent.io
                 </a>
               </div>
 
@@ -144,10 +144,10 @@ export default function ContactPage() {
                 </div>
 
                 <a
-                  href="tel:+910000000000"
+                  href="tel:+91 89406 31913"
                   className="mt-2 block font-semibold text-slate-950"
                 >
-                  +91 00000 00000
+                  +91 89406 31913
                 </a>
               </div>
 

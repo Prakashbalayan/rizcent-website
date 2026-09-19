@@ -1,14 +1,14 @@
 import Link from "next/link";
+
 import AdminProjectForm from "@/components/AdminProjectForm";
 
 export default function NewProjectPage() {
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-8 text-white sm:px-6 lg:px-10">
       <div className="mx-auto max-w-5xl">
-
         <Link
           href="/admin/projects"
-          className="text-sm text-slate-500 transition hover:text-white"
+          className="text-sm text-slate-500 transition hover:text-black"
         >
           ← Projects
         </Link>
@@ -30,7 +30,6 @@ export default function NewProjectPage() {
         <div className="mt-10">
           <AdminProjectForm />
         </div>
-
       </div>
     </main>
   );

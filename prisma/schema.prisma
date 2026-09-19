@@ -8,17 +8,16 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  name         String
-  email        String   @unique
-  passwordHash String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  sessions            Session[]
+  id                  String               @id @default(cuid())
+  name                String
+  email               String               @unique
+  passwordHash        String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  contactMessages     ContactMessage[]
   passwordResetTokens PasswordResetToken[]
   quoteRequests       QuoteRequest[]
-  contactMessages     ContactMessage[]
+  sessions            Session[]
 
   @@index([email])
   @@index([createdAt])
@@ -30,8 +29,7 @@ model Session {
   tokenHash String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([expiresAt])
@@ -44,8 +42,7 @@ model PasswordResetToken {
   expiresAt DateTime
   usedAt    DateTime?
   createdAt DateTime  @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([expiresAt])
@@ -59,9 +56,8 @@ model ContactMessage {
   company   String?
   message   String
   createdAt DateTime @default(now())
-
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
 
   @@index([createdAt])
   @@index([userId])
@@ -73,16 +69,15 @@ model QuoteRequest {
   projectType String
   timeline    String
   description String
-  services    String
   budget      String?
   name        String
   company     String?
   email       String
   phone       String?
   createdAt   DateTime @default(now())
-
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  services    String
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
 
   @@index([createdAt])
   @@index([userId])
@@ -112,6 +107,7 @@ model Project {
   services         String
   year             String
   clientType       String
+  imageUrl         String?
   featured         Boolean  @default(false)
   challenge        String
   solution         String
@@ -153,6 +149,7 @@ model Service {
   category         String
   features         String
   process          String
+  imageUrl         String?
   featured         Boolean  @default(false)
   published        Boolean  @default(true)
   createdAt        DateTime @default(now())
@@ -184,6 +181,7 @@ model Job {
   @@index([featured])
   @@index([published])
 }
+
 model RateLimit {
   id          String   @id @default(cuid())
   key         String   @unique

@@ -14,6 +14,7 @@ export type ProjectFormData = {
   services: string;
   year: string;
   clientType: string;
+  imageUrl: string;
   featured: boolean;
   challenge: string;
   solution: string;
@@ -34,6 +35,7 @@ const emptyProject: ProjectFormData = {
   services: "",
   year: new Date().getFullYear().toString(),
   clientType: "",
+  imageUrl: "",
   featured: false,
   challenge: "",
   solution: "",
@@ -98,15 +100,16 @@ export default function AdminProjectForm({ project }: Props) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          imageUrl: form.imageUrl.trim(),
+        }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.message || "Something went wrong."
-        );
+        throw new Error(data.message || "Something went wrong.");
       }
 
       setMessage(data.message);
@@ -117,9 +120,7 @@ export default function AdminProjectForm({ project }: Props) {
       }, 600);
     } catch (err) {
       setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong."
+        err instanceof Error ? err.message : "Something went wrong."
       );
     } finally {
       setSaving(false);
@@ -128,13 +129,10 @@ export default function AdminProjectForm({ project }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-
       {/* Basic Information */}
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
-          <h2 className="text-lg font-semibold">
-            Basic Information
-          </h2>
+          <h2 className="text-lg font-semibold">Basic Information</h2>
 
           <p className="mt-1 text-sm text-slate-500">
             Main information displayed on your project.
@@ -142,7 +140,6 @@ export default function AdminProjectForm({ project }: Props) {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-
           <Field
             label="Project Title"
             value={form.title}
@@ -163,9 +160,7 @@ export default function AdminProjectForm({ project }: Props) {
           <Field
             label="Category"
             value={form.category}
-            onChange={(value) =>
-              updateField("category", value)
-            }
+            onChange={(value) => updateField("category", value)}
             placeholder="Software Development"
             required
           />
@@ -173,20 +168,24 @@ export default function AdminProjectForm({ project }: Props) {
           <Field
             label="Year"
             value={form.year}
-            onChange={(value) =>
-              updateField("year", value)
-            }
+            onChange={(value) => updateField("year", value)}
             required
           />
 
           <Field
             label="Client Type"
             value={form.clientType}
-            onChange={(value) =>
-              updateField("clientType", value)
-            }
+            onChange={(value) => updateField("clientType", value)}
             placeholder="Business Platform"
             required
+          />
+
+          {/* Project Image Path */}
+          <Field
+            label="Project Image Path"
+            value={form.imageUrl}
+            onChange={(value) => updateField("imageUrl", value)}
+            placeholder="/images/projects/Business.png"
           />
 
           <div className="flex items-center rounded-xl border border-white/10 bg-black/20 px-4">
@@ -195,10 +194,7 @@ export default function AdminProjectForm({ project }: Props) {
                 type="checkbox"
                 checked={form.featured}
                 onChange={(event) =>
-                  updateField(
-                    "featured",
-                    event.target.checked
-                  )
+                  updateField("featured", event.target.checked)
                 }
                 className="h-4 w-4 rounded border-white/20 bg-slate-900"
               />
@@ -208,7 +204,19 @@ export default function AdminProjectForm({ project }: Props) {
               </span>
             </label>
           </div>
+        </div>
 
+        <div className="mt-3">
+          <p className="text-xs text-slate-500">
+            Example:{" "}
+            <span className="text-slate-300">
+              /images/projects/Business.png
+            </span>
+          </p>
+
+          <p className="mt-1 text-xs text-slate-600">
+            The image must be inside the public/images/projects folder.
+          </p>
         </div>
 
         <div className="mt-5">
@@ -227,16 +235,14 @@ export default function AdminProjectForm({ project }: Props) {
           <TextArea
             label="Full Description"
             value={form.description}
-            onChange={(value) =>
-              updateField("description", value)
-            }
+            onChange={(value) => updateField("description", value)}
             rows={5}
             required
           />
         </div>
       </section>
 
-      {/* Technology */}
+      {/* Technology and Services */}
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
           <h2 className="text-lg font-semibold">
@@ -252,9 +258,7 @@ export default function AdminProjectForm({ project }: Props) {
           <TextArea
             label="Technologies"
             value={form.technologies}
-            onChange={(value) =>
-              updateField("technologies", value)
-            }
+            onChange={(value) => updateField("technologies", value)}
             placeholder="Next.js, TypeScript, Node.js, PostgreSQL"
             rows={3}
             required
@@ -263,9 +267,7 @@ export default function AdminProjectForm({ project }: Props) {
           <TextArea
             label="Services"
             value={form.services}
-            onChange={(value) =>
-              updateField("services", value)
-            }
+            onChange={(value) => updateField("services", value)}
             placeholder="Software Development, Web Development, API Development"
             rows={3}
             required
@@ -276,9 +278,7 @@ export default function AdminProjectForm({ project }: Props) {
       {/* Project Details */}
       <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <div className="mb-6">
-          <h2 className="text-lg font-semibold">
-            Project Details
-          </h2>
+          <h2 className="text-lg font-semibold">Project Details</h2>
 
           <p className="mt-1 text-sm text-slate-500">
             Explain the challenge, solution and project results.
@@ -286,13 +286,10 @@ export default function AdminProjectForm({ project }: Props) {
         </div>
 
         <div className="space-y-5">
-
           <TextArea
             label="Challenge"
             value={form.challenge}
-            onChange={(value) =>
-              updateField("challenge", value)
-            }
+            onChange={(value) => updateField("challenge", value)}
             rows={5}
             required
           />
@@ -300,9 +297,7 @@ export default function AdminProjectForm({ project }: Props) {
           <TextArea
             label="Solution"
             value={form.solution}
-            onChange={(value) =>
-              updateField("solution", value)
-            }
+            onChange={(value) => updateField("solution", value)}
             rows={5}
             required
           />
@@ -310,12 +305,11 @@ export default function AdminProjectForm({ project }: Props) {
           <TextArea
             label="Results"
             value={form.results}
-            onChange={(value) =>
-              updateField("results", value)
-            }
-            placeholder={
-              "Centralized business workflows\nImproved operational visibility\nReduced manual processes\nScalable technical foundation"
-            }
+            onChange={(value) => updateField("results", value)}
+            placeholder={`Centralized business workflows
+Improved operational visibility
+Reduced manual processes
+Scalable technical foundation`}
             rows={7}
             required
           />
@@ -323,7 +317,6 @@ export default function AdminProjectForm({ project }: Props) {
           <p className="text-xs text-slate-600">
             Put each result on a separate line.
           </p>
-
         </div>
       </section>
 
@@ -342,7 +335,6 @@ export default function AdminProjectForm({ project }: Props) {
 
       {/* Actions */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
         <button
           type="button"
           onClick={() => router.push("/admin/projects")}
@@ -362,9 +354,7 @@ export default function AdminProjectForm({ project }: Props) {
               ? "Save Changes"
               : "Create Project"}
         </button>
-
       </div>
-
     </form>
   );
 }
@@ -390,9 +380,7 @@ function Field({
 
       <input
         value={value}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         required={required}
         className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-700 focus:border-blue-500/50"
@@ -424,9 +412,7 @@ function TextArea({
 
       <textarea
         value={value}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         rows={rows}
         required={required}

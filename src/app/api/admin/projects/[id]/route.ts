@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/auth";
 
@@ -8,7 +9,7 @@ interface RouteContext {
   }>;
 }
 
-async function isAdmin(request: NextRequest) {
+async function isAdmin(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get("admin_token")?.value;
 
   if (!token) {
@@ -86,20 +87,28 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
-    const slug = String(body.slug ?? "").trim().toLowerCase();
+    const slug = String(body.slug ?? "")
+      .trim()
+      .toLowerCase();
+
     const title = String(body.title ?? "").trim();
     const category = String(body.category ?? "").trim();
+
     const shortDescription = String(
       body.shortDescription ?? ""
     ).trim();
+
     const description = String(body.description ?? "").trim();
     const technologies = String(body.technologies ?? "").trim();
     const services = String(body.services ?? "").trim();
     const year = String(body.year ?? "").trim();
     const clientType = String(body.clientType ?? "").trim();
+    const imageUrl = String(body.imageUrl ?? "").trim();
+
     const challenge = String(body.challenge ?? "").trim();
     const solution = String(body.solution ?? "").trim();
     const results = String(body.results ?? "").trim();
+
     const featured = Boolean(body.featured);
 
     if (
@@ -174,6 +183,7 @@ export async function PUT(
         services,
         year,
         clientType,
+        imageUrl: imageUrl || null,
         featured,
         challenge,
         solution,

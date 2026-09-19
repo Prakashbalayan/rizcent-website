@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +13,7 @@ interface ServiceData {
   description: string;
   features: string[];
   process: string[];
+  imageUrl?: string | null;
   featured: boolean;
   published: boolean;
 }
@@ -28,21 +30,31 @@ export default function AdminServiceForm({
   const [slug, setSlug] = useState(service?.slug ?? "");
   const [title, setTitle] = useState(service?.title ?? "");
   const [category, setCategory] = useState(service?.category ?? "");
+
   const [shortDescription, setShortDescription] = useState(
     service?.shortDescription ?? ""
   );
+
   const [description, setDescription] = useState(
     service?.description ?? ""
   );
+
   const [features, setFeatures] = useState(
     service?.features?.join("\n") ?? ""
   );
+
   const [process, setProcess] = useState(
     service?.process?.join("\n") ?? ""
   );
+
+  const [imageUrl, setImageUrl] = useState(
+    service?.imageUrl ?? ""
+  );
+
   const [featured, setFeatured] = useState(
     service?.featured ?? false
   );
+
   const [published, setPublished] = useState(
     service?.published ?? true
   );
@@ -73,11 +85,12 @@ export default function AdminServiceForm({
     setError("");
 
     const payload = {
-      slug,
-      title,
-      category,
-      shortDescription,
-      description,
+      slug: slug.trim(),
+      title: title.trim(),
+      category: category.trim(),
+      shortDescription: shortDescription.trim(),
+      description: description.trim(),
+      imageUrl: imageUrl.trim() || null,
       features: features
         .split("\n")
         .map((item) => item.trim())
@@ -157,7 +170,7 @@ export default function AdminServiceForm({
         />
 
         <div className="flex items-center gap-6 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3">
-          <label className="flex cursor-pointer items-center gap-3 text-sm">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-slate-300">
             <input
               type="checkbox"
               checked={featured}
@@ -169,7 +182,7 @@ export default function AdminServiceForm({
             Featured
           </label>
 
-          <label className="flex cursor-pointer items-center gap-3 text-sm">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-slate-300">
             <input
               type="checkbox"
               checked={published}
@@ -200,11 +213,51 @@ export default function AdminServiceForm({
         required
       />
 
+      {/* Service Image */}
+      <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+        <div className="mb-4">
+          <h3 className="text-sm font-semibold text-white">
+            Service Image
+          </h3>
+
+          <p className="mt-1 text-xs text-slate-500">
+            Add the image URL or local image path for this service.
+          </p>
+        </div>
+
+        <input
+          type="text"
+          value={imageUrl}
+          onChange={(event) => setImageUrl(event.target.value)}
+          placeholder="/images/services/software-development.png"
+          className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+        />
+
+        {imageUrl.trim() && (
+          <div className="relative mt-5 aspect-[16/9] overflow-hidden rounded-xl border border-white/10 bg-slate-900">
+            <Image
+              src={imageUrl}
+              alt="Service preview"
+              fill
+              sizes="(max-width: 768px) 100vw, 700px"
+              className="object-contain p-4"
+              unoptimized
+            />
+          </div>
+        )}
+
+        <p className="mt-3 text-xs text-slate-600">
+          Example: /images/services/service-1.png
+        </p>
+      </div>
+
       <TextArea
         label="Features"
         value={features}
         onChange={setFeatures}
-        placeholder={"Custom software applications\nAPI development\nSystem integrations"}
+        placeholder={
+          "Custom software applications\nAPI development\nSystem integrations"
+        }
         rows={7}
         help="Enter one feature per line."
       />
@@ -213,7 +266,9 @@ export default function AdminServiceForm({
         label="Process"
         value={process}
         onChange={setProcess}
-        placeholder={"Discovery & requirements\nArchitecture & planning\nDevelopment\nTesting & deployment"}
+        placeholder={
+          "Discovery & requirements\nArchitecture & planning\nDevelopment\nTesting & deployment"
+        }
         rows={7}
         help="Enter one process step per line."
       />

@@ -1,15 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
 import { verifyAdminToken } from "@/lib/auth";
 
-interface RouteContext {
+type RouteContext = {
   params: Promise<{
     id: string;
   }>;
-}
+};
 
 async function isAdmin(request: NextRequest) {
   const token = request.cookies.get("admin_token")?.value;
+
+  console.log("Admin token exists:", Boolean(token));
 
   if (!token) {
     return false;
@@ -18,9 +21,18 @@ async function isAdmin(request: NextRequest) {
   return verifyAdminToken(token);
 }
 
+function cleanString(value: unknown) {
+  return String(value ?? "").trim();
+}
+
+function cleanOptionalString(value: unknown) {
+  const cleaned = cleanString(value);
+  return cleaned || null;
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: RouteContext
+  context: RouteContext
 ) {
   try {
     if (!(await isAdmin(request))) {
@@ -33,7 +45,7 @@ export async function GET(
       );
     }
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     const service = await prisma.service.findUnique({
       where: {
@@ -56,7 +68,7 @@ export async function GET(
       service,
     });
   } catch (error) {
-    console.error("SERVICE_GET_ERROR:", error);
+    console.error("SERVICE_GET_BY_ID_ERROR:", error);
 
     return NextResponse.json(
       {
@@ -70,7 +82,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: RouteContext
+  context: RouteContext
 ) {
   try {
     if (!(await isAdmin(request))) {
@@ -83,21 +95,24 @@ export async function PUT(
       );
     }
 
-    const { id } = await params;
+    const { id } = await context.params;
     const body = await request.json();
 
-    const slug = String(body.slug ?? "").trim().toLowerCase();
-    const title = String(body.title ?? "").trim();
-    const shortDescription = String(
-      body.shortDescription ?? ""
-    ).trim();
-    const description = String(body.description ?? "").trim();
-    const category = String(body.category ?? "").trim();
-    const features = String(body.features ?? "").trim();
-    const process = String(body.process ?? "").trim();
+    const slug = cleanString(body.slug).toLowerCase();
+    const title = cleanString(body.title);
+    const shortDescription = cleanString(body.shortDescription);
+    const description = cleanString(body.description);
+    const category = cleanString(body.category);
+    const features = cleanString(body.features);
+    const process = cleanString(body.process);
+    const imageUrl = cleanOptionalString(body.imageUrl);
+
     const featured = Boolean(body.featured);
+
     const published =
-      body.published === undefined ? true : Boolean(body.published);
+      body.published === undefined
+        ? true
+        : Boolean(body.published);
 
     if (
       !slug ||
@@ -117,13 +132,13 @@ export async function PUT(
       );
     }
 
-    const currentService = await prisma.service.findUnique({
+    const existingService = await prisma.service.findUnique({
       where: {
         id,
       },
     });
 
-    if (!currentService) {
+    if (!existingService) {
       return NextResponse.json(
         {
           success: false,
@@ -133,7 +148,7 @@ export async function PUT(
       );
     }
 
-    const duplicate = await prisma.service.findFirst({
+    const duplicateSlug = await prisma.service.findFirst({
       where: {
         slug,
         NOT: {
@@ -142,11 +157,11 @@ export async function PUT(
       },
     });
 
-    if (duplicate) {
+    if (duplicateSlug) {
       return NextResponse.json(
         {
           success: false,
-          message: "Another service already uses this slug.",
+          message: "A service with this slug already exists.",
         },
         { status: 409 }
       );
@@ -164,6 +179,7 @@ export async function PUT(
         category,
         features,
         process,
+        imageUrl,
         featured,
         published,
       },
@@ -189,7 +205,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: RouteContext
+  context: RouteContext
 ) {
   try {
     if (!(await isAdmin(request))) {
@@ -202,15 +218,15 @@ export async function DELETE(
       );
     }
 
-    const { id } = await params;
+    const { id } = await context.params;
 
-    const service = await prisma.service.findUnique({
+    const existingService = await prisma.service.findUnique({
       where: {
         id,
       },
     });
 
-    if (!service) {
+    if (!existingService) {
       return NextResponse.json(
         {
           success: false,
