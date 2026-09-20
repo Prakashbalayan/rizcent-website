@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-  },
+  icon: "/rizcent-favicon-v2.ico",
+},
 };
 
 export const viewport: Viewport = {
