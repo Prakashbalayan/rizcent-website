@@ -1,5 +1,4 @@
 import Hero from "@/components/home/Hero";
-import TrustedStrip from "@/components/home/TrustedStrip";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import SoftwareDevelopment from "@/components/home/SoftwareDevelopment";
 import Cybersecurity from "@/components/home/Cybersecurity";
@@ -14,9 +13,6 @@ export default function Home() {
     <main>
       {/* Hero */}
       <Hero />
-
-      {/* Technology */}
-      <TrustedStrip />
 
       {/* Main services */}
       <WhatWeDo />

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import Image from "next/image";
+
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
@@ -9,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore software development, web development, SaaS, mobile development and cybersecurity services by Rizcent Technologies.",
+    "Explore enterprise software engineering, digital product development, cloud technology, and cybersecurity services delivered by Rizcent Technologies.",
 };
 
 function normalizeImagePath(
@@ -78,22 +80,23 @@ export default async function ServicesPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-600/20 blur-[120px]" />
+
         <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <div className="max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
-              Our Services
+              Technology Services
             </p>
 
             <h1 className="mt-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Technology solutions built around your business.
+              Engineering technology that moves your business forward.
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              From custom software and modern websites to SaaS platforms and
-              cybersecurity, we build practical digital solutions designed for
-              long-term growth.
+              We design, build and secure digital solutions that help
+              organizations modernize operations, launch products, strengthen
+              security and scale with confidence.
             </p>
           </div>
         </div>
@@ -105,11 +108,12 @@ export default async function ServicesPage() {
           {services.length === 0 ? (
             <div className="rounded-[30px] border border-slate-200 px-6 py-20 text-center">
               <h2 className="text-2xl font-bold text-slate-950">
-                Services coming soon
+                Our services are being updated
               </h2>
 
               <p className="mt-3 text-slate-600">
-                Our services are currently being updated.
+                We are currently updating our technology capabilities and
+                service portfolio. Please check back soon for more information.
               </p>
             </div>
           ) : (
@@ -206,23 +210,24 @@ export default async function ServicesPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="rounded-[36px] bg-blue-600 px-7 py-16 text-center text-white sm:px-12 lg:px-20">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-100">
-              Start your project
+              Build With Rizcent
             </p>
 
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold sm:text-5xl">
-              Have a technology project in mind?
+              Turn your technology goals into measurable outcomes.
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl leading-7 text-blue-100">
-              Let&apos;s discuss your requirements and find the right
-              technology approach for your business.
+              Whether you are launching a new product, modernizing an existing
+              platform or strengthening your security posture, our team can
+              help define the right technology strategy and execution path.
             </p>
 
             <Link
               href="/request-quote"
               className="mt-8 inline-flex rounded-full bg-black px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-slate-100"
             >
-              Request a Quote →
+              Discuss Your Requirements →
             </Link>
           </div>
         </div>

@@ -1,16 +1,27 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import {
+  FormEvent,
+  Suspense,
+  useMemo,
+  useState,
+} from "react";
+
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 import {
   PASSWORD_MIN_LENGTH,
   validatePassword,
 } from "@/lib/password-policy";
+
 import { getSafeRedirect } from "@/lib/safe-redirect";
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -42,8 +53,7 @@ export default function RegisterPage() {
   const passwordChecks = [
     {
       label: `At least ${PASSWORD_MIN_LENGTH} characters`,
-      valid:
-        password.length >= PASSWORD_MIN_LENGTH,
+      valid: password.length >= PASSWORD_MIN_LENGTH,
     },
     {
       label: "One uppercase letter",
@@ -63,7 +73,9 @@ export default function RegisterPage() {
     },
     {
       label: "No spaces",
-      valid: password.length > 0 && !/\s/.test(password),
+      valid:
+        password.length > 0 &&
+        !/\s/.test(password),
     },
   ];
 
@@ -141,17 +153,20 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            password,
+          }),
         },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim().toLowerCase(),
-          password,
-        }),
-      });
+      );
 
       const data = await response.json();
 
@@ -187,6 +202,7 @@ export default function RegisterPage() {
     <main className="min-h-screen bg-slate-950 px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-96px)] max-w-lg items-center justify-center">
         <div className="w-full">
+
           {/* Brand */}
           <div className="mb-8 text-center">
             <Link
@@ -222,6 +238,7 @@ export default function RegisterPage() {
               onSubmit={handleSubmit}
               className="space-y-5"
             >
+
               {/* Name */}
               <div>
                 <label
@@ -286,7 +303,9 @@ export default function RegisterPage() {
                     id="password"
                     name="password"
                     type={
-                      showPassword ? "text" : "password"
+                      showPassword
+                        ? "text"
+                        : "password"
                     }
                     autoComplete="new-password"
                     value={password}
@@ -302,7 +321,9 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={() =>
-                      setShowPassword((current) => !current)
+                      setShowPassword(
+                        (current) => !current,
+                      )
                     }
                     disabled={loading}
                     aria-label={
@@ -327,8 +348,7 @@ export default function RegisterPage() {
                       className={`text-xs font-bold ${
                         passwordStrength.percentage === 100
                           ? "text-emerald-400"
-                          : passwordStrength.percentage >=
-                              66
+                          : passwordStrength.percentage >= 66
                             ? "text-yellow-400"
                             : password
                               ? "text-red-400"
@@ -432,7 +452,9 @@ export default function RegisterPage() {
                     }
                     className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-400 transition hover:bg-slate-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {showConfirmPassword ? "🙈" : "👁️"}
+                    {showConfirmPassword
+                      ? "🙈"
+                      : "👁️"}
                   </button>
                 </div>
 
@@ -485,6 +507,7 @@ export default function RegisterPage() {
             <div className="mt-7 border-t border-slate-800 pt-6 text-center">
               <p className="text-sm text-slate-400">
                 Already have an account?{" "}
+
                 <Link
                   href={
                     redirectTo !== "/account"
@@ -513,5 +536,27 @@ export default function RegisterPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-slate-950 px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto flex min-h-[calc(100vh-96px)] max-w-lg items-center justify-center">
+            <div className="w-full text-center">
+              <div className="mx-auto h-12 w-12 animate-pulse rounded-2xl bg-blue-600" />
+
+              <p className="mt-6 text-sm font-semibold text-slate-400">
+                Loading Rizcent...
+              </p>
+            </div>
+          </div>
+        </main>
+      }
+    >
+      <RegisterForm />
+    </Suspense>
   );
 }

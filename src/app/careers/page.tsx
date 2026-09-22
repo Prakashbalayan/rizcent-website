@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
@@ -8,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join Rizcent Technologies and build software, digital products and cybersecurity solutions.",
+    "Join Rizcent Technologies and help build secure, scalable software, digital products, cloud solutions, and cybersecurity capabilities.",
 };
 
 export default async function CareersPage() {
@@ -31,29 +32,29 @@ export default async function CareersPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-600/20 blur-[120px]" />
-
         <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
           <div className="max-w-4xl">
             <div className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
-              Careers
+              Careers at Rizcent
             </div>
 
             <h1 className="mt-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Build the future with us.
+              Build technology that moves businesses forward.
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              Join a technology team building software, digital products and
-              cybersecurity solutions for ambitious businesses.
+              Join a team combining software engineering, cybersecurity, cloud
+              technology, and product thinking to solve meaningful technology
+              challenges.
             </p>
 
             <a
               href="#open-positions"
               className="mt-9 inline-flex rounded-full bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-500"
             >
-              View Open Positions →
+              Explore Open Positions →
             </a>
           </div>
         </div>
@@ -68,12 +69,13 @@ export default async function CareersPage() {
             </div>
 
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-              Work on meaningful technology.
+              Grow your career by solving real technology challenges.
             </h2>
 
             <p className="mt-5 text-lg leading-8 text-slate-600">
-              We believe great products are created by curious people who care
-              about quality, technology and the customers they serve.
+              We bring together curious, driven people who care about
+              engineering quality, security, continuous learning, and the
+              impact technology can create for businesses and their customers.
             </p>
           </div>
 
@@ -81,23 +83,23 @@ export default async function CareersPage() {
             {[
               {
                 number: "01",
-                title: "Real Projects",
-                text: "Work on practical products and technology challenges.",
+                title: "Meaningful Work",
+                text: "Work on real products, platforms, and technology challenges with practical business impact.",
               },
               {
                 number: "02",
-                title: "Learn & Grow",
-                text: "Develop your skills through challenging technical work.",
+                title: "Continuous Growth",
+                text: "Strengthen your technical and professional capabilities through hands-on work and continuous learning.",
               },
               {
                 number: "03",
-                title: "Ownership",
-                text: "Take responsibility and make meaningful contributions.",
+                title: "Ownership & Impact",
+                text: "Take ownership of your work, contribute ideas, and make decisions that create measurable value.",
               },
               {
                 number: "04",
-                title: "Great Team",
-                text: "Collaborate with people who care about doing excellent work.",
+                title: "Collaborative Culture",
+                text: "Work alongside people who value curiosity, accountability, knowledge sharing, and quality.",
               },
             ].map((item) => (
               <div
@@ -133,26 +135,27 @@ export default async function CareersPage() {
             </div>
 
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-              Find your next challenge.
+              Find your next opportunity.
             </h2>
           </div>
 
           {jobs.length === 0 ? (
             <div className="mt-10 rounded-[28px] border border-slate-200 bg-white px-6 py-16 text-center">
               <h3 className="text-2xl font-bold text-slate-950">
-                No open positions right now.
+                No current openings.
               </h3>
 
               <p className="mx-auto mt-3 max-w-xl text-slate-600">
-                We&apos;re not currently hiring for any published positions,
-                but we&apos;re always interested in meeting talented people.
+                There are no published positions available at the moment.
+                However, we are always interested in connecting with talented
+                people who can contribute to our growing technology team.
               </p>
 
               <Link
                 href="/contact"
                 className="mt-7 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
               >
-                Get in Touch →
+                Introduce Yourself →
               </Link>
             </div>
           ) : (
@@ -216,19 +219,20 @@ export default async function CareersPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="rounded-[36px] bg-blue-600 px-7 py-16 text-center text-white sm:px-12 lg:px-20">
             <h2 className="text-3xl font-bold sm:text-5xl">
-              Don&apos;t see your role?
+              Don&apos;t see the right opportunity?
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-blue-100">
-              We&apos;re always interested in meeting talented people.
-              Introduce yourself and tell us what you can bring to the team.
+              Great talent does not always fit neatly into a job description.
+              Tell us about your experience, expertise, and the kind of work
+              you want to build with us.
             </p>
 
             <Link
               href="/contact"
               className="mt-8 inline-flex rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-slate-100"
             >
-              Get in Touch →
+              Start a Conversation →
             </Link>
           </div>
         </div>

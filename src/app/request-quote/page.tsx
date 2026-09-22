@@ -1,7 +1,5 @@
 ﻿import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import QuoteForm from "@/components/QuoteForm";
-import { getCurrentUser } from "@/lib/user-auth";
 
 export const metadata: Metadata = {
   title: "Request a Quote",
@@ -9,14 +7,7 @@ export const metadata: Metadata = {
     "Tell Rizcent Technologies about your project and request a quote for software, web, mobile, SaaS or cybersecurity services.",
 };
 
-export default async function RequestQuotePage() {
-  const user = await getCurrentUser();
-
-  // Customers must be logged in before requesting a quotation.
-  if (!user) {
-    redirect("/login?redirect=/request-quote");
-  }
-
+export default function RequestQuotePage() {
   return (
     <main className="bg-white">
       {/* Hero */}

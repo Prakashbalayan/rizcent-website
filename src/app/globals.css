@@ -1148,15 +1148,15 @@ svg {
 
 .rz-hero-title {
   margin:
-    35px
+    50px
     0
     0;
 
   font-size:
     clamp(
-      48px,
-      5.2vw,
-      82px
+      25px,
+      5vw,
+      75px
     );
 
   line-height:
@@ -1166,7 +1166,7 @@ svg {
     -0.055em;
 
   font-weight:
-    900;
+    850;
 
   color:
     #f8fafc;
@@ -3172,7 +3172,7 @@ svg {
 
   .rz-hero-title {
     margin-top:
-      25px;
+      10px;
 
     font-size:
       clamp(
@@ -3273,7 +3273,7 @@ svg {
 
   .rz-core-subtitle {
     font-size:
-      6px;
+      4px;
   }
 
   .rz-core-status {

@@ -1,22 +1,23 @@
 import Link from "next/link";
+
 import Container from "../ui/Container";
 import SectionHeading from "../ui/SectionHeading";
 
 const capabilities = [
   "Web Applications",
-  "SaaS Platforms",
+  "SaaS & Digital Platforms",
   "Mobile Applications",
-  "Custom Software",
+  "Custom Software Solutions",
   "REST & GraphQL APIs",
   "E-commerce Platforms",
-  "Cloud Applications",
-  "Maintenance & Support",
+  "Cloud-Native Applications",
+  "Product Modernization",
 ];
 
 const metrics = [
   {
     value: "01",
-    label: "Product",
+    label: "Strategy",
   },
   {
     value: "02",
@@ -42,9 +43,9 @@ export default function SoftwareDevelopment() {
           {/* Content */}
           <div>
             <SectionHeading
-              eyebrow="Software development"
-              title="From idea to production-ready product."
-              description="We help startups and businesses turn ideas into reliable, scalable digital products with modern engineering practices."
+              eyebrow="Software Engineering"
+              title="Build digital products engineered for real-world growth."
+              description="We transform business ideas and technical requirements into secure, scalable and production-ready software. From customer-facing applications to complex digital platforms, we combine thoughtful product thinking with modern engineering practices."
             />
 
             {/* Capabilities */}
@@ -70,7 +71,7 @@ export default function SoftwareDevelopment() {
               href="/services/software-development"
               className="group mt-9 inline-flex items-center text-sm font-semibold text-slate-950"
             >
-              Explore software development
+              Explore our software capabilities
 
               <span className="ml-2 inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 text-xs transition-all duration-300 group-hover:translate-x-1 group-hover:border-indigo-200 group-hover:bg-indigo-600 group-hover:text-white">
                 →
@@ -94,7 +95,7 @@ export default function SoftwareDevelopment() {
 
                 <div className="ml-4 flex h-7 flex-1 items-center rounded-lg border border-white/[0.06] bg-white/[0.03] px-3">
                   <span className="text-[9px] text-slate-600">
-                    rizcent.app / dashboard
+                    rizcent.app / platform
                   </span>
                 </div>
               </div>
@@ -113,9 +114,9 @@ export default function SoftwareDevelopment() {
                   <div className="space-y-1.5">
                     {[
                       "Overview",
-                      "Projects",
+                      "Products",
                       "Analytics",
-                      "Team",
+                      "Infrastructure",
                       "Settings",
                     ].map((item, index) => (
                       <div
@@ -137,11 +138,11 @@ export default function SoftwareDevelopment() {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="text-[9px] uppercase tracking-[0.16em] text-slate-600">
-                        Overview
+                        Platform Overview
                       </div>
 
                       <div className="mt-2 text-lg font-semibold text-white">
-                        Product performance
+                        Digital Product Performance
                       </div>
                     </div>
 
@@ -199,7 +200,7 @@ export default function SoftwareDevelopment() {
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
 
                   <span className="text-[10px] font-medium text-emerald-300">
-                    Systems operational
+                    Platform operational
                   </span>
                 </div>
 

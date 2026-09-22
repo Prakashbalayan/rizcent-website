@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
@@ -6,9 +7,9 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Insights & Resources",
   description:
-    "Insights from Rizcent Technologies on software development, web development, SaaS, cloud and cybersecurity.",
+    "Explore expert insights from Rizcent Technologies on software engineering, cybersecurity, cloud, SaaS, digital products, and emerging technology.",
 };
 
 export default async function BlogPage() {
@@ -31,7 +32,6 @@ export default async function BlogPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-slate-950 text-white">
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-600/20 blur-[120px]" />
-
         <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
@@ -41,12 +41,13 @@ export default async function BlogPage() {
             </p>
 
             <h1 className="mt-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Ideas for building better technology.
+              Perspectives for building secure, scalable technology.
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              Practical insights on software development, web applications,
-              SaaS platforms, cloud technology and cybersecurity.
+              Explore practical insights, engineering perspectives, and
+              technology guidance across software development, cybersecurity,
+              cloud infrastructure, SaaS, and digital product engineering.
             </p>
           </div>
         </div>
@@ -58,11 +59,12 @@ export default async function BlogPage() {
           {posts.length === 0 ? (
             <div className="rounded-[30px] border border-slate-200 px-6 py-20 text-center">
               <h2 className="text-2xl font-bold text-slate-950">
-                Articles coming soon
+                Insights are on the way
               </h2>
 
               <p className="mt-3 text-slate-600">
-                We are currently preparing our latest insights.
+                Our team is preparing practical insights and perspectives on
+                the technologies shaping modern digital businesses.
               </p>
             </div>
           ) : (
@@ -111,7 +113,7 @@ export default async function BlogPage() {
                     </p>
 
                     <div className="mt-6 font-semibold text-blue-600 transition group-hover:translate-x-1">
-                      Read Article →
+                      Read Insight →
                     </div>
                   </div>
                 </Link>
@@ -126,23 +128,25 @@ export default async function BlogPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="rounded-[36px] bg-blue-600 px-7 py-16 text-center text-white sm:px-12 lg:px-20">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-100">
-              Work with Rizcent
+              Build with Rizcent
             </p>
 
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold sm:text-5xl">
-              Have a technology project in mind?
+              Have a technology challenge to solve?
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-blue-100">
-              Let&apos;s discuss your requirements and find the right approach
-              for building your product.
+              Whether you are building a new digital product, modernizing an
+              existing platform, or strengthening your security posture, our
+              team can help turn your requirements into a reliable, scalable
+              solution.
             </p>
 
             <Link
               href="/request-quote"
-              className="mt-8 inline-flex rounded-full bg-black px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-slate-100"
+              className="mt-8 inline-flex rounded-full bg-black px-7 py-3.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
             >
-              Request a Quote
+              Start a Conversation
             </Link>
           </div>
         </div>

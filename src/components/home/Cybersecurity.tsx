@@ -1,26 +1,30 @@
 import Link from "next/link";
+
 import Container from "../ui/Container";
 
 const securityServices = [
   {
     title: "Penetration Testing",
     description:
-      "Find exploitable vulnerabilities before attackers do.",
+      "Identify exploitable vulnerabilities across applications, networks and infrastructure before they can be leveraged by real-world attackers.",
   },
+
   {
     title: "Security Audits",
     description:
-      "Review applications, infrastructure and security controls.",
+      "Assess applications, infrastructure, configurations and security controls to identify gaps and strengthen your overall security posture.",
   },
+
   {
     title: "API Security",
     description:
-      "Protect APIs against authentication, authorization and logic flaws.",
+      "Secure APIs against authentication, authorization, access-control and business-logic vulnerabilities across the application lifecycle.",
   },
+
   {
     title: "Cloud Security",
     description:
-      "Improve the security posture of your cloud infrastructure.",
+      "Strengthen cloud environments through secure configurations, identity controls, workload protection and continuous security practices.",
   },
 ];
 
@@ -38,16 +42,17 @@ export default function Cybersecurity() {
             </div>
 
             <h2 className="max-w-xl text-4xl font-bold tracking-tight sm:text-5xl">
-              Build fast.
+              Secure by design.
               <span className="block text-blue-400">
-                Stay secure.
+                Resilient by default.
               </span>
             </h2>
 
             <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-              Security shouldn't be something you add at the end. We help
-              businesses integrate security into applications,
-              infrastructure and development workflows from the beginning.
+              Security is an essential part of building and operating modern
+              technology. We help organizations identify risk, protect critical
+              systems and integrate security across applications, cloud
+              infrastructure and development environments.
             </p>
 
             <Link

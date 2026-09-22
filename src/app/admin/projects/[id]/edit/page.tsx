@@ -63,7 +63,7 @@ export default async function EditProjectPage({
             services: project.services,
             year: project.year,
             clientType: project.clientType,
-            imageUrl: project.imageUrl,
+            imageUrl: project.imageUrl ?? "",
             featured: project.featured,
             challenge: project.challenge,
             solution: project.solution,

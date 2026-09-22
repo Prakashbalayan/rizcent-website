@@ -1,12 +1,19 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import {
+  FormEvent,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { getSafeRedirect } from "@/lib/safe-redirect";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -19,11 +26,8 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -181,7 +185,9 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() =>
-                      setShowPassword((current) => !current)
+                      setShowPassword(
+                        (current) => !current,
+                      )
                     }
                     disabled={loading}
                     aria-label={
@@ -229,7 +235,8 @@ export default function LoginPage() {
             {/* Register */}
             <div className="mt-7 border-t border-slate-800 pt-6 text-center">
               <p className="text-sm text-slate-400">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
+
                 <Link
                   href={
                     redirectTo !== "/account"
@@ -258,5 +265,21 @@ export default function LoginPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+          <div className="text-sm text-slate-400">
+            Loading...
+          </div>
+        </main>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

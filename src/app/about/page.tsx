@@ -12,58 +12,70 @@ export const metadata: Metadata = {
 
 const beliefs = [
   {
-    number: "01",
-    title: "Technology should solve problems",
+    number: "01", 
+    title: "Build for what’s next",
     description:
-      "We believe technology should make businesses faster, safer and more efficient. We focus on practical solutions rather than unnecessary complexity.",
+      "We design technology foundations that are adaptable, scalable, and ready to evolve as businesses grow.",
   },
   {
     number: "02",
-    title: "Security belongs from day one",
+    title: "Security is built in",
     description:
-      "Security should not be added after a product is built. We consider security throughout architecture, development, deployment and maintenance.",
+      "Security is not an afterthought. We embed protection, resilience, and responsible engineering into every layer of the technology we deliver.",
   },
   {
     number: "03",
-    title: "Good engineering lasts",
+    title: "Simplicity drives impact",
     description:
-      "We build with maintainability, scalability and reliability in mind so products can continue evolving as businesses grow.",
+      "Great technology should make complex things easier. We focus on practical, purposeful solutions that deliver measurable business value.",
   },
   {
     number: "04",
-    title: "Partnership creates better products",
+    title: "Reliability earns trust",
     description:
-      "The best results happen when technical teams and business teams work together with clear communication and shared goals.",
+      "Businesses depend on technology every day. We engineer for stability, continuity, and performance so our clients can operate with confidence.",
   },
+   {
+    number: "05",
+    title: "Partnership drives progresst",
+    description:
+      "We work closely with our clients, combining technical expertise with a clear understanding of their business goals to create lasting outcomes."
+  },
+   {
+    number: "06",
+    title: "Innovation must have purpose",
+    description:
+      "We embrace emerging technologies when they solve real problems, create meaningful opportunities, and move businesses forward."
+  }
 ];
 
 const expertise = [
   {
     number: "01",
-    title: "Software Engineering",
+    title: "Cybersecurity",
     description:
-      "Modern web applications, SaaS platforms, APIs and custom software.",
+      "We help organizations identify and reduce security risks through penetration testing, application security, vulnerability assessment, and security consulting.",
     icon: "⌘",
   },
   {
     number: "02",
-    title: "Cybersecurity",
+    title: "Software Engineering",
     description:
-      "Security assessments, penetration testing, application security and security consulting.",
+      "We design and develop modern web applications, APIs, SaaS platforms, and custom software engineered for performance, reliability, and long-term growth.",
     icon: "◇",
   },
   {
     number: "03",
-    title: "Cloud Technology",
+    title: "Cloud & DevSecOps",
     description:
-      "Cloud architecture, deployment, infrastructure and security-focused solutions.",
+      "We architect, deploy, and secure cloud environments with automation, monitoring, and DevSecOps practices built into the development lifecycle.",
     icon: "◌",
   },
   {
     number: "04",
-    title: "Product Development",
+    title: "Product Engineering",
     description:
-      "Turning business ideas into usable, scalable and production-ready digital products.",
+      "We turn ideas into reliable digital products through product strategy, engineering, testing, deployment, and continuous improvement.",
     icon: "↗",
   },
 ];
@@ -71,56 +83,56 @@ const expertise = [
 const process = [
   {
     number: "01",
-    title: "Understand",
+    title: "Discover",
     description:
-      "We learn about your business, users, goals and technical requirements.",
+      "We learn about your business, users, challenges, and technical requirements to define what needs to be solved.",
   },
   {
     number: "02",
-    title: "Plan",
+    title: "Design",
     description:
-      "We define the right architecture, scope, technology and delivery approach.",
+      "We define the architecture, technology stack, security requirements, scope, and delivery roadmap.",
   },
   {
     number: "03",
-    title: "Build",
+    title: "Develop",
     description:
-      "We develop, test and refine the solution using modern engineering practices.",
+      "We design, develop, test, and secure the solution using modern engineering and development practices.",
   },
   {
     number: "04",
-    title: "Grow",
+    title: "Deliver & Scale",
     description:
-      "We help maintain, improve, secure and scale the product as your business evolves.",
+      "We deploy, monitor, improve, and secure your product so it can evolve with your business.",
   },
 ];
 
 const stats = [
   {
     value: "01",
-    label: "Technology-first mindset",
+    label: "Engineering-first mindset",
   },
   {
     value: "02",
-    label: "Security-first approach",
+    label: "Security by design",
   },
   {
     value: "03",
-    label: "Business-focused delivery",
+    label: "Outcome-driven delivery",
   },
   {
     value: "04",
-    label: "Long-term partnership",
+    label: "Built for the long term",
   },
 ];
 
 const whyRizcent = [
-  "Modern technology stack",
-  "Security-conscious engineering",
-  "Scalable architecture",
-  "Clear communication",
-  "Practical solutions",
-  "Long-term support",
+  "Modern Engineering",
+  "Security by Design",
+  "Scalable Architecture",
+  "Transparent Communication",
+  "Practical Solutions",
+  "Long-Term Partnership",
 ];
 
 export default function AboutPage() {
@@ -395,13 +407,13 @@ export default function AboutPage() {
                 </div>
 
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950">
-                  Make technology more useful, secure and accessible.
+                  Securing, Modernizing, and Accelerating Business Through Technology.
                 </h2>
 
                 <p className="mt-5 text-base leading-7 text-slate-600">
-                  Our mission is to help businesses use technology confidently
-                  by delivering practical software solutions and security
-                  expertise that create real business value.
+                 We deliver proactive IT management, cloud modernization, 
+                 and multi-layered cybersecurity solutions to eliminate operational friction, 
+                 safeguard critical data, and ensure business continuity for our clients.
                 </p>
               </div>
             </div>
@@ -422,13 +434,13 @@ export default function AboutPage() {
                 </div>
 
                 <h2 className="mt-4 text-3xl font-bold tracking-tight">
-                  A digital world where businesses can build with confidence.
+                  Empowering Businesses Beyond Technology Limits.
                 </h2>
 
                 <p className="mt-5 text-base leading-7 text-slate-300">
-                  We want to become a trusted technology partner for businesses
-                  that value engineering quality, security and long-term
-                  thinking.
+                  To establish an adaptable digital foundation for global businesses, 
+                  where secure infrastructure and seamless cloud connectivity 
+                  allow organizations to scale without technical boundary.
                 </p>
               </div>
             </div>
@@ -443,8 +455,8 @@ export default function AboutPage() {
         <Container>
           <SectionHeading
             eyebrow="What we believe"
-            title="Principles that guide how we build."
-            description="Our principles influence the way we approach products, engineering, security and client relationships."
+            title="Technology should create Momentum."
+            description="We believe technology should remove complexity, strengthen operations, and give businesses the confidence to move forward."
           />
 
           <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -499,17 +511,16 @@ export default function AboutPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/20 bg-indigo-400/[0.06] px-4 py-2 text-sm font-semibold text-indigo-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Our expertise
+                What we do
               </div>
 
               <h2 className="mt-6 max-w-xl text-4xl font-semibold tracking-tight sm:text-5xl">
-                Engineering and security under one roof.
+                Engineering and cybersecurity, built to work together..
               </h2>
 
               <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-                We bring software engineering and cybersecurity together so
-                businesses can build digital products with security considered
-                from the beginning.
+                We build secure, scalable digital solutions by combining software engineering, 
+                cybersecurity, and cloud expertise from the very beginning.
               </p>
 
               <div className="mt-8 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.16em] text-slate-500">
@@ -559,8 +570,8 @@ export default function AboutPage() {
         <Container>
           <SectionHeading
             eyebrow="How we work"
-            title="Simple process. Clear communication."
-            description="We keep projects focused by breaking complex technology work into clear stages."
+            title="A clear process. Built for better outcomes."
+            description="We turn complex technology challenges into structured, measurable steps — from understanding your needs to building, securing, and scaling the solution."
             centered
           />
 
@@ -640,14 +651,11 @@ export default function AboutPage() {
                 </div>
 
                 <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-tight sm:text-4xl">
-                  Build with confidence from the beginning.
+                  Technology built with security at its core.
                 </h2>
 
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">
-                  Whether you're launching a new product or improving an
-                  existing system, we combine engineering discipline, security
-                  awareness and business thinking to create technology that can
-                  grow with you.
+                  We combine modern engineering, cybersecurity, and business thinking to build reliable digital solutions that are designed to perform, scale, and evolve.
                 </p>
 
                 <Link
@@ -703,12 +711,11 @@ export default function AboutPage() {
               </div>
 
               <h2 className="mx-auto max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                Let's build something meaningful.
+                Let’s build what’s next.
               </h2>
 
               <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-indigo-100 sm:text-lg">
-                Have a product idea, technical challenge or security
-                requirement? Let's start a conversation.
+               Have a product idea, engineering challenge, or security requirement? Let’s turn it into a secure, scalable solution.
               </p>
 
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
@@ -730,7 +737,7 @@ export default function AboutPage() {
                   className="group inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
                 >
                   <span className="text-white">
-                    Contact Us
+                    Talk to Us
                   </span>
                 </Link>
               </div>

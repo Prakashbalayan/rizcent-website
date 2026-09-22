@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Explore software, web, SaaS, mobile and cybersecurity projects built by Rizcent Technologies.",
+    "Explore selected software engineering, digital product, cloud, and cybersecurity projects delivered by Rizcent Technologies.",
 };
 
 const projectImages = [
@@ -44,12 +44,13 @@ export default async function ProjectsPage() {
             </div>
 
             <h1 className="mt-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              Technology built to solve real problems.
+              Engineering solutions built for real-world impact.
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              Explore selected projects where we have helped businesses build
-              software, digital products and secure technology solutions.
+              Explore selected work across software engineering, digital
+              products, cloud technology, APIs, and cybersecurity — built to
+              solve practical business challenges and support long-term growth.
             </p>
           </div>
         </div>
@@ -64,11 +65,12 @@ export default async function ProjectsPage() {
           {projects.length === 0 ? (
             <div className="rounded-[30px] border border-slate-200 px-6 py-20 text-center">
               <h2 className="text-2xl font-bold text-slate-950">
-                Projects coming soon
+                Our project portfolio is being updated
               </h2>
 
               <p className="mt-3 text-slate-600">
-                Our project portfolio is currently being updated.
+                We are preparing a selection of recent engineering and
+                technology projects. Check back soon for new case studies.
               </p>
             </div>
           ) : (
@@ -170,7 +172,7 @@ export default async function ProjectsPage() {
                         </span>
 
                         <span className="text-sm font-bold text-blue-600">
-                          View Project
+                          Explore Project
                           <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">
                             →
                           </span>
@@ -211,16 +213,17 @@ export default async function ProjectsPage() {
             <div className="relative mx-auto max-w-3xl">
               <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-200 backdrop-blur-xl">
                 <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.8)]" />
-                Start a Project
+                Start a Conversation
               </div>
 
               <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-5xl">
-                Have an idea you want to build?
+                Have a technology challenge to solve?
               </h2>
 
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-lg">
-                Tell us about your requirements and we&apos;ll help you find
-                the right technology approach.
+                From new digital products to complex engineering and security
+                challenges, let&apos;s discuss your requirements and define the
+                right path from idea to production.
               </p>
 
               <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
@@ -228,7 +231,7 @@ export default async function ProjectsPage() {
                   href="/request-quote"
                   className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-bold !text-blue-700 shadow-[0_14px_35px_rgba(255,255,255,0.12)] transition-all duration-300 hover:-translate-y-1 hover:bg-slate-100 hover:shadow-[0_20px_45px_rgba(255,255,255,0.2)]"
                 >
-                  Request a Quote
+                  Start a Project
                   <span className="text-lg">→</span>
                 </Link>
 
@@ -236,7 +239,7 @@ export default async function ProjectsPage() {
                   href="/contact"
                   className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/[0.06] px-7 py-4 text-sm font-bold !text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-white/[0.12]"
                 >
-                  Contact Us
+                  Talk to Our Team
                   <span className="text-lg text-cyan-300">↗</span>
                 </Link>
               </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import Container from "../ui/Container";
 
 export default function FinalCTA() {
@@ -6,7 +7,6 @@ export default function FinalCTA() {
     <section className="relative overflow-hidden bg-white py-24 sm:py-28 lg:py-32">
       <Container>
         <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#080b14] px-7 py-16 text-center shadow-2xl shadow-slate-950/10 sm:px-12 lg:px-20 lg:py-24">
-          
           {/* Ambient glow */}
           <div
             aria-hidden="true"
@@ -36,7 +36,6 @@ export default function FinalCTA() {
           />
 
           <div className="relative z-10">
-            
             {/* Brand mark */}
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-[18px] border border-indigo-300/20 bg-gradient-to-br from-indigo-500 to-indigo-700 text-xl font-bold text-white shadow-xl shadow-indigo-500/20">
               R
@@ -45,26 +44,27 @@ export default function FinalCTA() {
             {/* Eyebrow */}
             <div className="mt-7 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
-              Let&apos;s build together
+              Build with Rizcent
             </div>
 
             {/* Heading */}
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl">
-              Have a project
+              Have a technology
+
               <span className="block bg-gradient-to-r from-indigo-300 via-white to-cyan-300 bg-clip-text text-transparent">
-                in mind?
+                challenge to solve?
               </span>
             </h2>
 
             {/* Description */}
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
-              Let&apos;s build something secure, scalable and meaningful for
-              your business with technology designed for long-term growth.
+              Partner with Rizcent Technologies to design, build and secure
+              digital solutions that support your business objectives and
+              scale with your organization.
             </p>
 
             {/* Buttons */}
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              
               {/* Primary */}
               <Link
                 href="/request-quote"
@@ -77,7 +77,7 @@ export default function FinalCTA() {
                 />
 
                 <span className="relative z-10 whitespace-nowrap text-slate-950 transition-colors duration-300 group-hover:text-white">
-                  Start a Project
+                  Discuss Your Project
                 </span>
 
                 <span className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full bg-slate-950 text-xs text-slate-950 transition-all duration-300 group-hover:bg-white group-hover:text-indigo-600">
@@ -113,14 +113,14 @@ export default function FinalCTA() {
 
               <div className="flex items-center gap-2 text-xs text-slate-500">
                 <span className="h-1 w-1 rounded-full bg-cyan-400" />
-                Cybersecurity
+                Digital Products
               </div>
 
               <div className="hidden h-3 w-px bg-white/10 sm:block" />
 
               <div className="flex items-center gap-2 text-xs text-slate-500">
                 <span className="h-1 w-1 rounded-full bg-emerald-400" />
-                Cloud Technology
+                Cybersecurity &amp; Cloud
               </div>
             </div>
           </div>

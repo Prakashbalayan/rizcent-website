@@ -1,4 +1,5 @@
 import Container from "../ui/Container";
+
 import SectionHeading from "../ui/SectionHeading";
 
 const steps = [
@@ -6,37 +7,37 @@ const steps = [
     number: "01",
     title: "Discover",
     description:
-      "Understand your goals, users, business requirements and technical challenges.",
+      "Understand your business objectives, users, operational requirements and the technology challenges that need to be solved.",
   },
   {
     number: "02",
-    title: "Plan",
+    title: "Strategize",
     description:
-      "Define scope, architecture, technology, milestones and delivery strategy.",
+      "Translate requirements into a clear technical strategy covering architecture, technology choices, scope, priorities and delivery milestones.",
   },
   {
     number: "03",
     title: "Design",
     description:
-      "Create intuitive interfaces and experiences around your users and business.",
+      "Design intuitive digital experiences and system interfaces that align user needs with business goals and technical requirements.",
   },
   {
     number: "04",
-    title: "Build",
+    title: "Engineer",
     description:
-      "Develop the product using clean, scalable and maintainable engineering practices.",
+      "Build reliable, scalable and maintainable solutions using modern engineering practices, with quality considered throughout development.",
   },
   {
     number: "05",
     title: "Secure",
     description:
-      "Test the application and infrastructure for vulnerabilities and security weaknesses.",
+      "Identify and address security risks across applications, APIs, infrastructure and workflows before solutions move into production.",
   },
   {
     number: "06",
-    title: "Launch",
+    title: "Deploy & Evolve",
     description:
-      "Deploy, monitor and support your product as it moves into production.",
+      "Launch with confidence, monitor real-world performance and continuously improve the solution as your business and technology needs evolve.",
   },
 ];
 
@@ -46,8 +47,8 @@ export default function Process() {
       <Container>
         <SectionHeading
           eyebrow="Our process"
-          title="A clear path from idea to launch."
-          description="Our process keeps projects organized, transparent and focused on delivering meaningful results."
+          title="From strategy to production, with clarity at every stage."
+          description="We combine structured discovery, thoughtful design, disciplined engineering and security-focused delivery to turn technology requirements into dependable digital solutions."
           centered
         />
 

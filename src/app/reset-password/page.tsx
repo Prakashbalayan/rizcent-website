@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const passwordRequirements = [
@@ -88,7 +88,7 @@ function getPasswordStrength(password: string) {
   };
 }
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -201,6 +201,7 @@ export default function ResetPasswordPage() {
     <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
       <div className="mx-auto flex min-h-[80vh] max-w-lg items-center justify-center">
         <div className="w-full rounded-3xl border border-white/10 bg-white/[0.05] p-8 shadow-2xl backdrop-blur-xl">
+
           {/* Header */}
           <div className="mb-8 text-center">
             <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-2xl ring-1 ring-cyan-400/20">
@@ -542,17 +543,26 @@ export default function ResetPasswordPage() {
               </Link>
             </div>
           )}
-
-          <div className="mt-6 text-center">
-            <Link
-              href="/"
-              className="text-sm text-slate-500 transition hover:text-slate-300"
-            >
-              Back to Rizcent Technologies
-            </Link>
-          </div>
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
+          <div className="mx-auto flex min-h-[80vh] max-w-lg items-center justify-center">
+            <div className="text-center text-sm text-slate-400">
+              Loading...
+            </div>
+          </div>
+        </main>
+      }
+    >
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
